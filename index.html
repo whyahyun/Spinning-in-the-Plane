@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Agenda & Whyahyun - Spinning In The Plane</title>
+    <title>Agenda,Whyahyun - Spinning in the Plane [DS]</title>
     <!-- 아이콘 사용을 위한 FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -29,7 +29,7 @@
 
         .container {
             width: 100%;
-            max-width: 360px;
+            max-width: 330px;
             background: rgba(255, 255, 255, 0.55);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -203,12 +203,11 @@
             transition: width 0.1s linear;
         }
 
-        /* 트랙 버튼 영역에 여유 공간(마진)을 주어 꽉 차지 않도록 조정 */
         .track-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 6px;
-            padding: 0 6px;
+            padding: 0 4px;
         }
 
         .track-btn {
@@ -237,7 +236,7 @@
             color: #fff;
         }
 
-        /* 여백의 미를 살린 구분선 */
+        /* 구분선 */
         .divider {
             width: 100%;
             height: 1px;
@@ -245,7 +244,7 @@
             margin: 11px 0;
         }
 
-        /* 음원 사이트 영역 (1열 한 줄 정렬) */
+        /* 음원 사이트 버튼 영역 (가로 폭 컴팩트하게 고정 및 중앙 정렬) */
         .links-container {
             display: flex;
             flex-direction: column;
@@ -259,13 +258,13 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            width: 100%;
+            width: 180px; /* 컴팩트한 고정 폭 */
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: #1a1a1a;
             text-decoration: none;
-            padding: 7px 10px;
+            padding: 6px 10px;
             border-radius: 9px;
             font-weight: bold;
             font-size: 11px;
@@ -280,6 +279,11 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 6px;
+            width: 180px; /* 음원 버튼과 동일한 폭 */
+            margin: 0 auto;
+        }
+
+        .insta-grid .link-btn {
             width: 100%;
         }
 
@@ -298,52 +302,62 @@
         .link-btn.bugs i { color: #FF1D32; }
         .link-btn.instagram i { color: #E1306C; }
 
-        .blur-sparkle {
+        /* 워터리한 물방울(Glass Water Drop) 터치/마우스 효과 */
+        .water-drop {
             position: absolute;
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle, rgba(160, 225, 255, 0.6) 0%, rgba(130, 200, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
             border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(120, 210, 255, 0.3) 60%, rgba(0, 140, 220, 0.1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             pointer-events: none;
-            filter: blur(8px);
-            transform: translate(-50%, -50%) scale(0.5);
-            animation: blurSparkleFade 0.6s cubic-bezier(0, 0.2, 0.8, 1) forwards;
+            transform: translate(-50%, -50%) scale(0.2);
+            box-shadow: 0 4px 15px rgba(0, 130, 200, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+            animation: waterDropRipple 0.65s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
             z-index: 9999;
         }
 
-        @keyframes blurSparkleFade {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+        @keyframes waterDropRipple {
+            0% {
+                transform: translate(-50%, -50%) scale(0.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2.5);
+                opacity: 0;
+                filter: blur(2px);
+            }
         }
     </style>
 </head>
 <body>
 
     <script>
-        function createBlurSparkle(x, y) {
-            if (Math.random() > 0.3) {
-                let sparkle = document.createElement('div');
-                sparkle.className = 'blur-sparkle';
-                sparkle.style.left = x + 'px';
-                sparkle.style.top = y + 'px';
-                document.body.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 600);
+        function createWaterDrop(x, y) {
+            if (Math.random() > 0.25) {
+                let drop = document.createElement('div');
+                drop.className = 'water-drop';
+                let size = Math.floor(Math.random() * 20) + 40;
+                drop.style.width = size + 'px';
+                drop.style.height = size + 'px';
+                drop.style.left = x + 'px';
+                drop.style.top = y + 'px';
+                document.body.appendChild(drop);
+                setTimeout(() => drop.remove(), 650);
             }
         }
 
         document.addEventListener('mousemove', function(e) {
-            createBlurSparkle(e.pageX, e.pageY);
+            createWaterDrop(e.pageX, e.pageY);
         });
 
         document.addEventListener('touchmove', function(e) {
             if(e.touches && e.touches[0]) {
-                createBlurSparkle(e.touches[0].pageX, e.touches[0].pageY);
+                createWaterDrop(e.touches[0].pageX, e.touches[0].pageY);
             }
         }, {passive: true});
         
         document.addEventListener('touchstart', function(e) {
             if(e.touches && e.touches[0]) {
-                createBlurSparkle(e.touches[0].pageX, e.touches[0].pageY);
+                createWaterDrop(e.touches[0].pageX, e.touches[0].pageY);
             }
         }, {passive: true});
     </script>
@@ -490,10 +504,10 @@
             });
         </script>
         
-        <!-- 첫 번째 구분선 -->
+        <!-- 구분선 -->
         <div class="divider"></div>
 
-        <!-- 음원 사이트 영역 (1열 한 줄 정렬) -->
+        <!-- 음원 사이트 영역 -->
         <div class="links-container">
             <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">
                 <i class="fa-brands fa-spotify"></i> Spotify
@@ -512,7 +526,7 @@
             </a>
         </div>
 
-        <!-- 두 번째 구분선 -->
+        <!-- 구분선 -->
         <div class="divider"></div>
 
         <!-- 아티스트 인스타 소개 영역 -->
