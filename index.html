@@ -33,7 +33,7 @@
             background: rgba(255, 255, 255, 0.55);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 16px 14px 14px 14px;
+            padding: 14px 14px 12px 14px;
             border-radius: 24px;
             box-shadow: 0 16px 40px rgba(0, 100, 150, 0.15), 
                         inset 0 0 25px rgba(255, 255, 255, 0.9),
@@ -42,7 +42,6 @@
             animation: smoothSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             position: relative;
             z-index: 2;
-            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .container::before {
@@ -64,7 +63,7 @@
         }
 
         .art-wrapper {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: center;
             position: relative;
@@ -72,7 +71,7 @@
 
         .album-art-container {
             width: 100%;
-            max-width: 130px; /* 180px에서 컴팩트하게 축소 */
+            max-width: 120px;
             aspect-ratio: 1 / 1;
             position: relative;
             border-radius: 14px;
@@ -90,7 +89,7 @@
         }
 
         .listen-to {
-            font-size: 9px;
+            font-size: 8.5px;
             font-weight: 800;
             letter-spacing: 2px;
             color: #007a46;
@@ -100,119 +99,99 @@
         }
 
         h1 {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 800;
-            margin: 0 0 3px;
+            margin: 0 0 2px;
             color: #111;
             letter-spacing: -0.5px;
             text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
         p.artist {
-            font-size: 11px;
+            font-size: 10.5px;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 600;
             text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
         .preview-player-box {
-            background: rgba(240, 250, 255, 0.75);
+            background: rgba(240, 250, 255, 0.65);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1.5px solid rgba(255, 255, 255, 0.9);
             border-radius: 12px;
-            padding: 8px 10px;
-            margin-bottom: 10px;
+            padding: 7px 9px;
+            margin-bottom: 8px;
             box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.95),
                         0 4px 12px rgba(0, 100, 150, 0.05);
-            text-align: left;
+            text-align: center;
         }
 
-        .player-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-
-        .player-title-text {
-            font-size: 9.5px;
-            font-weight: 800;
-            color: #005588;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            letter-spacing: 0.5px;
-        }
-
+        /* 2번 요청: 투명한 배경의 상태 표시창 */
         .visualizer-screen {
-            background: rgba(10, 30, 25, 0.88);
+            background: rgba(255, 255, 255, 0.4);
             border-radius: 6px;
             padding: 4px 8px;
-            margin-bottom: 7px;
+            margin-bottom: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
         .now-playing-label {
             font-family: monospace;
-            font-size: 9.5px;
-            color: #00ff88;
-            text-shadow: 0 0 5px rgba(0,255,136,0.6);
+            font-size: 9px;
+            color: #006633;
+            font-weight: bold;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 170px;
+            max-width: 180px;
         }
 
         .realtime-eq {
             display: flex;
             gap: 2px;
             align-items: flex-end;
-            height: 10px;
+            height: 9px;
         }
 
         .realtime-eq span {
             width: 2px;
-            background: #00ff88;
+            background: #007a46;
             border-radius: 1px;
             height: 3px;
             transition: height 0.02s ease;
-            box-shadow: 0 0 4px rgba(0,255,136,0.5);
         }
 
+        /* 1번 요청: 트랙 버튼 2개 나란히 배치 */
         .track-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
         }
 
         .track-btn {
-            width: 100%;
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(6px);
             border: 1px solid rgba(255, 255, 255, 0.9);
             border-radius: 8px;
-            padding: 6px 9px;
-            font-size: 11px;
+            padding: 6px 4px;
+            font-size: 10.5px;
             font-weight: 700;
             color: #222;
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 5px;
             transition: all 0.12s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.02), inset 0 1px 2px rgba(255,255,255,0.9);
-        }
-
-        .track-btn span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .track-btn:active {
@@ -220,40 +199,47 @@
             color: #fff;
         }
 
-        .link-list {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
+        /* 3번 요청: 음원 플랫폼 및 인스타 그리드 (중앙정렬, 딱 맞는 크기) */
+        .grid-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .insta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
         }
 
         .link-btn {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 6px;
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: #1a1a1a;
             text-decoration: none;
-            padding: 9px 14px;
-            border-radius: 12px;
+            padding: 8px 6px;
+            border-radius: 10px;
             font-weight: bold;
-            font-size: 13px;
-            box-shadow: 0 4px 12px rgba(0, 120, 180, 0.06),
-                        inset 0 2px 4px rgba(255, 255, 255, 0.9);
+            font-size: 11.5px;
+            box-shadow: 0 3px 10px rgba(0, 120, 180, 0.05),
+                        inset 0 1px 3px rgba(255, 255, 255, 0.9);
             border: 1.5px solid rgba(255, 255, 255, 0.9);
-            transform-origin: center center;
             transition: transform 0.12s ease, background 0.2s;
-        }
-
-        .link-btn span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            white-space: nowrap;
         }
 
         .link-btn i {
-            font-size: 15px;
+            font-size: 13px;
+        }
+
+        .link-btn:active {
+            transform: scale(0.95);
         }
 
         .link-btn.spotify i { color: #1DB954; }
@@ -261,28 +247,14 @@
         .link-btn.melon i { color: #00CD3C; }
         .link-btn.genie i { color: #002D62; }
         .link-btn.bugs i { color: #FF1D32; }
+        .link-btn.instagram i { color: #E1306C; }
 
         .divider {
             width: 100%;
             height: 1px;
             background: linear-gradient(to right, transparent, rgba(0, 130, 200, 0.25), transparent);
-            margin: 10px 0;
+            margin: 8px 0;
         }
-
-        .insta-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 7px;
-        }
-
-        .link-btn.instagram { 
-            justify-content: center;
-            padding: 9px 6px;
-            font-size: 12px;
-            background: rgba(255, 255, 255, 0.65);
-        }
-        
-        .link-btn.instagram i { color: #E1306C; }
 
         /* 터치/마우스 블러리한 하늘색 큰 원 효과 */
         .blur-sparkle {
@@ -347,28 +319,23 @@
         <h1>Spinning in the Plane</h1>
         <p class="artist">by AGENDA, WHYAHYUN</p>
 
-        <!-- AGWA_PREVIEW.mp3 레트로 미니 플레이어 칸 -->
+        <!-- AGWA_PREVIEW 미니 플레이어 칸 -->
         <div class="preview-player-box">
-            <div class="player-header">
-                <span class="player-title-text"><i class="fa-solid fa-compact-disc"></i> AGWA_PREVIEW.mp3</span>
-            </div>
-
-            <!-- 디스플레이 스크린 & 트랙 번호 표시 -->
+            <!-- 투명한 상태 표시창 -->
             <div class="visualizer-screen">
-                <span class="now-playing-label" id="nowPlayingText">STANDBY...</span>
+                <span class="now-playing-label" id="nowPlayingText">STANDBY</span>
                 <div class="realtime-eq" id="realtimeEq">
                     <span></span><span></span><span></span><span></span><span></span>
                 </div>
             </div>
 
+            <!-- 1번, 2번 트랙 한 줄(2분할) 배치 -->
             <div class="track-buttons">
-                <button class="track-btn" onclick="playAudio('track1.mp3', '[01/02] 01. 거짓말쟁이 (Liar)', this)">
-                    <span><i class="fa-solid fa-play" style="color: #00c756;"></i> 1. 거짓말쟁이 (Liar)</span>
-                    <span style="font-size: 9px; color: #555;">Preview</span>
+                <button class="track-btn" onclick="playAudio('track1.mp3', '01. 거짓말쟁이', this)">
+                    <i class="fa-solid fa-play" style="color: #00c756;"></i> 1. 거짓말쟁이
                 </button>
-                <button class="track-btn" onclick="playAudio('track2.mp3', '[02/02] 02. 아무래도 (Whatever)', this)">
-                    <span><i class="fa-solid fa-play" style="color: #00c756;"></i> 2. 아무래도 (Whatever)</span>
-                    <span style="font-size: 9px; color: #555;">Preview</span>
+                <button class="track-btn" onclick="playAudio('track2.mp3', '02. 아무래도', this)">
+                    <i class="fa-solid fa-play" style="color: #00c756;"></i> 2. 아무래도
                 </button>
             </div>
         </div>
@@ -402,7 +369,7 @@
                     analyser.getByteFrequencyData(dataArray);
                     for (let i = 0; i < eqBars.length; i++) {
                         let value = dataArray[i * 2] || 0;
-                        let heightPercent = Math.max(3, (value / 255) * 12);
+                        let heightPercent = Math.max(3, (value / 255) * 10);
                         eqBars[i].style.height = heightPercent + 'px';
                     }
                     animationId = requestAnimationFrame(updateVisualizer);
@@ -422,7 +389,7 @@
                     currentAudio.play().then(() => {
                         document.querySelectorAll('.track-btn i').forEach(i => i.className = "fa-solid fa-play");
                         btn.querySelector('i').className = "fa-solid fa-pause";
-                        nowPlayingText.innerText = "PLAYING " + trackInfo;
+                        nowPlayingText.innerText = trackInfo;
                         cancelAnimationFrame(animationId);
                         updateVisualizer();
                     }).catch(e => {
@@ -434,7 +401,7 @@
             currentAudio.onended = function() {
                 document.querySelectorAll('.track-btn i').forEach(i => i.className = "fa-solid fa-play");
                 cancelAnimationFrame(animationId);
-                nowPlayingText.innerText = "READY";
+                nowPlayingText.innerText = "STANDBY";
                 eqBars.forEach(bar => bar.style.height = '3px');
             };
 
@@ -442,56 +409,42 @@
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     let targetUrl = this.getAttribute('href');
-
-                    this.style.transform = 'scale(0.96)';
-                    let container = document.getElementById('mainContainer');
-                    container.style.transform = 'scale(0.98) translateY(2px)';
-
                     setTimeout(() => {
                         window.open(targetUrl, '_blank');
-                        this.style.transform = 'scale(1)';
-                        container.style.transform = 'scale(1) translateY(0)';
-                    }, 200);
+                    }, 150);
                 });
             });
         </script>
         
         <div class="divider"></div>
 
-        <div class="link-list">
-            <!-- 음원 플랫폼 링크들 -->
+        <!-- 음원 플랫폼 버튼들 (플랫폼 이름 크기에 맞춘 컴팩트한 중앙정렬 그리드) -->
+        <div class="grid-links">
             <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">
-                <span><i class="fa-brands fa-spotify"></i> Spotify</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #777;"></i>
+                <i class="fa-brands fa-spotify"></i> Spotify
             </a>
             <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn apple">
-                <span><i class="fa-brands fa-apple"></i> Apple Music</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #777;"></i>
+                <i class="fa-brands fa-apple"></i> Apple
             </a>
             <a href="https://www.melon.com/album/detail.htm?albumId=14556600" target="_blank" class="link-btn melon">
-                <span><i class="fa-solid fa-compact-disc"></i> Melon</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #777;"></i>
+                <i class="fa-solid fa-compact-disc"></i> Melon
             </a>
             <a href="https://www.genie.co.kr/detail/albumInfo?axnm=88166077" target="_blank" class="link-btn genie">
-                <span><i class="fa-solid fa-music"></i> Genie</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #777;"></i>
+                <i class="fa-solid fa-music"></i> Genie
             </a>
-            <a href="https://music.bugs.co.kr/album/4155090?wl_ref=list_tr_11_search" target="_blank" class="link-btn bugs">
-                <span><i class="fa-solid fa-headphones"></i> Bugs</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #777;"></i>
+            <a href="https://music.bugs.co.kr/album/4155090?wl_ref=list_tr_11_search" target="_blank" class="link-btn bugs" style="grid-column: span 2;">
+                <i class="fa-solid fa-headphones"></i> Bugs
             </a>
+        </div>
 
-            <div class="divider"></div>
-
-            <!-- 인스타그램 버튼 (한 줄에 2개) -->
-            <div class="insta-group">
-                <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
-                    <span><i class="fa-brands fa-instagram"></i> AGENDA</span>
-                </a>
-                <a href="https://instagram.com/whyahyun" target="_blank" class="link-btn instagram">
-                    <span><i class="fa-brands fa-instagram"></i> WHYAHYUN</span>
-                </a>
-            </div>
+        <!-- 인스타그램 버튼 (한 줄에 2개) -->
+        <div class="insta-grid">
+            <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
+                <i class="fa-brands fa-instagram"></i> AGENDA
+            </a>
+            <a href="https://instagram.com/whyahyun" target="_blank" class="link-btn instagram">
+                <i class="fa-brands fa-instagram"></i> WHYAHYUN
+            </a>
         </div>
     </div>
 
