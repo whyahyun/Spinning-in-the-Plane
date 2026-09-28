@@ -9,7 +9,7 @@
             box-sizing: border-box;
         }
         body {
-            background: linear-gradient(135deg, #d6f2ff 0%, #b8e4f9 100%);
+            background-color: #ffffff; /* 깔끔한 화이트 배경 */
             color: #222;
             font-family: 'Apple SD Gothic Neo', -apple-system, sans-serif;
             text-align: center;
@@ -23,12 +23,11 @@
         .container {
             width: 100%;
             max-width: 380px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px 20px;
             border-radius: 28px;
-            box-shadow: 0 15px 35px rgba(0, 130, 190, 0.18);
-            border: 3px solid #00c756;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            border: 2px solid #eaeaea;
             
             /* 등장 애니메이션 효과 */
             animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -52,9 +51,9 @@
             aspect-ratio: 1 / 1;
             border-radius: 16px;
             object-fit: cover;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
             margin-bottom: 20px;
-            border: 2px solid #fff;
+            border: 2px solid #f0f0f0;
             
             /* 앨범 커버 살짝 숨쉬는 듯한 부드러운 애니메이션 */
             animation: floatArt 4s ease-in-out infinite;
@@ -69,7 +68,7 @@
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 2.5px;
-            color: #00a844;
+            color: #00c756;
             text-transform: uppercase;
             margin-bottom: 8px;
         }
@@ -104,7 +103,7 @@
             border-radius: 14px;
             font-weight: bold;
             font-size: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
             border: 1.5px solid #eee;
             transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
@@ -113,7 +112,7 @@
             transform: translateY(-3px) scale(1.02);
             border-color: #00c756;
             background: #f4fff7;
-            box-shadow: 0 6px 15px rgba(0, 199, 86, 0.15);
+            box-shadow: 0 6px 15px rgba(0, 199, 86, 0.12);
         }
 
         /* 플랫폼별 포인트 컬러 바 */
@@ -122,12 +121,38 @@
         .link-btn.melon { border-left: 6px solid #00CD3C; }
         .link-btn.genie { border-left: 6px solid #002D62; }
         .link-btn.bugs { border-left: 6px solid #FF1D32; }
+
+        /* 소셜(인스타그램) 링크 영역 */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .social-btn {
+            font-size: 12px;
+            color: #555;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 6px 12px;
+            background: #f7f7f7;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .social-btn:hover {
+            background: #222;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- 앨범 커버 이미지 (파일명을 cover.jpg로 올리면 자동 연동됩니다) -->
+        <!-- 앨범 커버 이미지 -->
         <img src="cover.png" alt="Spinning In The Plane Artwork" class="album-art">
         
         <div class="listen-to">Listen to</div>
@@ -140,6 +165,12 @@
             <a href="https://www.melon.com/album/detail.htm?albumId=14556600" target="_blank" class="link-btn melon">Melon</a>
             <a href="https://www.genie.co.kr/detail/albumInfo?axnm=88166077" target="_blank" class="link-btn genie">Genie</a>
             <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn bugs">Bugs</a>
+        </div>
+
+        <!-- 인스타그램 채널 연동 영역 -->
+        <div class="social-links">
+            <a href="https://instagram.com/vque6v" target="_blank" class="social-btn">@ AGENDA Instagram</a>
+            <a href="https://instagram.com/whyahyun" target="_blank" class="social-btn">@ WHYAHYUN Instagram</a>
         </div>
     </div>
 
