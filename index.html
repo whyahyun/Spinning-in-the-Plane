@@ -11,7 +11,8 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #ffffff;
+            /* 푸릇하고 맑은 프루티거 아에로 스타일의 아쿠아 그라데이션 배경 */
+            background: linear-gradient(135deg, #e0f7ff 0%, #b5e2ff 50%, #d4ffed 100%);
             color: #222;
             font-family: 'Apple SD Gothic Neo', -apple-system, sans-serif;
             text-align: center;
@@ -22,14 +23,19 @@
             align-items: center;
             min-height: 100vh;
         }
+
         .container {
             width: 100%;
-            max-width: 380px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px 20px;
-            border-radius: 28px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-            border: 2px solid #eaeaea;
+            max-width: 390px;
+            /* 물처럼 투명하고 영롱한 글래스모피즘 효과 */
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 30px 22px;
+            border-radius: 32px;
+            box-shadow: 0 20px 45px rgba(0, 140, 200, 0.15), 
+                        inset 0 0 20px rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.8);
             animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
@@ -38,29 +44,40 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        /* 앨범 커버를 감싸는 3D 공간 설정 */
+        .art-wrapper {
+            perspective: 1000px;
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: center;
+        }
+
         .album-art {
             width: 100%;
             max-width: 210px;
             height: auto;
             aspect-ratio: 1 / 1;
-            border-radius: 16px;
+            border-radius: 18px;
             object-fit: cover;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-            margin-bottom: 20px;
-            border: 2px solid #f0f0f0;
-            animation: floatArt 4s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            
+            /* 3초마다 3D로 한 바퀴 휙 도는 플립 애니메이션 */
+            transform-style: preserve-3d;
+            animation: flip3D 3s infinite ease-in-out;
         }
 
-        @keyframes floatArt {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+        @keyframes flip3D {
+            0% { transform: rotateY(0deg); }
+            70% { transform: rotateY(360deg); } /* 한바퀴 돌고 */
+            100% { transform: rotateY(360deg); } /* 잠깐 멈추는 타임 */
         }
 
         .listen-to {
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 2.5px;
-            color: #00c756;
+            color: #008c52;
             text-transform: uppercase;
             margin-bottom: 8px;
         }
@@ -75,7 +92,7 @@
 
         p.artist {
             font-size: 13px;
-            color: #666;
+            color: #555;
             margin-bottom: 25px;
             font-weight: 600;
         }
@@ -86,20 +103,23 @@
             gap: 12px;
         }
 
+        /* Frutiger Aero 입체감 스타일 버튼 */
         .link-btn {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #ffffff;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
             color: #222;
             text-decoration: none;
             padding: 14px 18px;
-            border-radius: 14px;
+            border-radius: 16px;
             font-weight: bold;
             font-size: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            border: 1.5px solid #eee;
+            box-shadow: 0 6px 15px rgba(0, 120, 180, 0.08),
+                        inset 0 1px 0 rgba(255, 255, 255, 1);
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
             transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(5px);
         }
 
         .link-btn span {
@@ -114,12 +134,13 @@
 
         .link-btn:hover {
             transform: translateY(-3px) scale(1.02);
+            background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(240,255,248,0.9));
             border-color: #00c756;
-            background: #f4fff7;
-            box-shadow: 0 6px 15px rgba(0, 199, 86, 0.12);
+            box-shadow: 0 8px 20px rgba(0, 199, 86, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 1);
         }
 
-        /* 플랫폼별 포인트 컬러 및 아이콘 색상 */
+        /* 플랫폼별 포인트 컬러 바 */
         .link-btn.spotify { border-left: 6px solid #1DB954; }
         .link-btn.spotify i { color: #1DB954; }
         
@@ -135,31 +156,42 @@
         .link-btn.bugs { border-left: 6px solid #FF1D32; }
         .link-btn.bugs i { color: #FF1D32; }
 
+        /* 음원 칸과 인스타 칸을 확실하게 분리해 주는 구역선 */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: rgba(0, 120, 180, 0.15);
+            margin: 20px 0;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+
         /* 인스타그램 버튼 전용 스타일 */
         .link-btn.instagram { 
             border-left: 6px solid #E1306C; 
-            background: #fafafa;
+            background: linear-gradient(to bottom, rgba(255,250,252,0.9), rgba(255,240,245,0.7));
         }
         .link-btn.instagram i { color: #E1306C; }
         .link-btn.instagram:hover {
-            background: #fff0f5;
+            background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,230,240,0.9));
             border-color: #E1306C;
-            box-shadow: 0 6px 15px rgba(225, 48, 108, 0.12);
+            box-shadow: 0 8px 20px rgba(225, 48, 108, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 1);
         }
 
         .insta-group {
-            margin-top: 12px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- 앨범 커버 이미지 -->
-        <img src="cover.png" alt="Spinning In The Plane Artwork" class="album-art">
+        <!-- 3D 플립 애니메이션이 적용된 앨범 커버 영역 -->
+        <div class="art-wrapper">
+            <img src="cover.png" alt="Spinning In The Plane Artwork" class="album-art">
+        </div>
         
         <div class="listen-to">Listen to</div>
         <h1>Spinning in the Plane</h1>
@@ -169,34 +201,37 @@
             <!-- 음원 플랫폼 링크들 -->
             <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">
                 <span><i class="fa-brands fa-spotify"></i> Spotify</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
             </a>
             <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn apple">
                 <span><i class="fa-brands fa-apple"></i> Apple Music</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
             </a>
             <a href="https://www.melon.com/album/detail.htm?albumId=14556600" target="_blank" class="link-btn melon">
                 <span><i class="fa-solid fa-compact-disc"></i> Melon</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
             </a>
             <a href="https://www.genie.co.kr/detail/albumInfo?axnm=88166077" target="_blank" class="link-btn genie">
                 <span><i class="fa-solid fa-music"></i> Genie</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
             </a>
             <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn bugs">
                 <span><i class="fa-solid fa-headphones"></i> Bugs</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
             </a>
 
-            <!-- 인스타그램 버튼 그룹 (이름만 깔끔하게 노출) -->
+            <!-- 음원 칸과 확실하게 분리해주는 워터리한 구분선 -->
+            <div class="divider"></div>
+
+            <!-- 인스타그램 버튼 그룹 -->
             <div class="insta-group">
                 <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
                     <span><i class="fa-brands fa-instagram"></i> AGENDA</span>
-                    <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+                    <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
                 </a>
                 <a href="https://instagram.com/whyahyun" target="_blank" class="link-btn instagram">
                     <span><i class="fa-brands fa-instagram"></i> WHYAHYUN</span>
-                    <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+                    <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
                 </a>
             </div>
         </div>
