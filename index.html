@@ -27,25 +27,6 @@
             position: relative;
         }
 
-        /* 배경 전체를 감싸는 앨범 커버 실루엣 레이어 */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -20%; left: -20%; right: -20%; bottom: -20%;
-            background: url('cover.png') no-repeat center center;
-            background-size: cover;
-            opacity: 0.28;
-            filter: blur(14px) saturate(1.3);
-            z-index: 1;
-            pointer-events: none;
-            animation: bgPulse 15s ease-in-out infinite alternate;
-        }
-
-        @keyframes bgPulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.06); }
-        }
-
         .container {
             width: 100%;
             max-width: 400px;
@@ -62,6 +43,27 @@
             position: relative;
             z-index: 2;
             transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* 컨테이너 박스 내부 뒤쪽에 딱 알맞은 크기로 들어가는 앨범 실루엣 레이어 */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 15px; left: 15px; right: 15px; bottom: 15px;
+            background: url('cover.png') no-repeat center center;
+            background-size: cover;
+            /* 사이트 크기를 초과하지 않고 박스 내부에서 은은하게 실루엣을 형성하도록 조절 */
+            opacity: 0.22;
+            filter: blur(10px) saturate(1.3);
+            border-radius: 24px;
+            z-index: -1;
+            pointer-events: none;
+            animation: bgPulse 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { transform: scale(0.98); }
+            100% { transform: scale(1.03); }
         }
 
         @keyframes smoothSlideDown {
@@ -86,7 +88,7 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             transform: scale(1);
-            /* 부드러운 저음 반응을 위해 전환 속도 최적화 */
+            /* 저음역대 비트에 맞춘 부드러운 반응 전환 속도 */
             transition: transform 0.08s cubic-bezier(0.1, 0.9, 0.2, 1);
         }
 
@@ -473,7 +475,7 @@
             </div>
         </div>
 
-        <!-- 오디오 재생 및 저음역대 중심 실시간 분석 스크립트 -->
+        <!-- 오디오 재생 및 저음역대 분석 스크립트 -->
         <audio id="audioPlayer" crossorigin="anonymous"></audio>
         <script>
             let currentAudio = document.getElementById('audioPlayer');
@@ -490,7 +492,7 @@
                     source = audioCtx.createMediaElementSource(currentAudio);
                     source.connect(analyser);
                     analyser.connect(audioCtx.destination);
-                    analyser.fftSize = 128; // 해상도 세분화
+                    analyser.fftSize = 128;
                     dataArray = new Uint8Array(analyser.frequencyBinCount);
                 }
                 if (audioCtx.state === 'suspended') {
@@ -502,14 +504,14 @@
                 if (!currentAudio.paused) {
                     analyser.getByteFrequencyData(dataArray);
                     
-                    // 1. 이퀄라이저 바 (전체 대역 반응)
+                    // 이퀄라이저 바 업데이트
                     for (let i = 0; i < eqBars.length; i++) {
                         let value = dataArray[i * 2] || 0;
                         let heightPercent = Math.max(4, (value / 255) * 16);
                         eqBars[i].style.height = heightPercent + 'px';
                     }
 
-                    // 2. 앨범 커버 줌: 초저음~저음 영역(인덱스 1번~3번 빈)의 에너지 페이로드만 집중 추출
+                    // 저음역대(인덱스 1~3번) 중심 앨범 커버 줌 반응
                     let bassSum = 0;
                     let bassRangeCount = 3;
                     for (let i = 1; i <= bassRangeCount; i++) {
@@ -517,7 +519,6 @@
                     }
                     let bassAverage = bassSum / bassRangeCount;
 
-                    // 저음역대 킥/베이스 타격 시에만 쿵 하고 커지도록 임계값 및 감도 설정
                     let scaleValue = 1 + (bassAverage / 255) * 0.11;
                     artContainer.style.transform = `scale(${scaleValue})`;
 
@@ -556,7 +557,7 @@
                 eqBars.forEach(bar => bar.style.height = '4px');
             };
 
-            // 링크 배너 클릭 시 인터랙션
+            // 링크 배너 인터랙션
             document.querySelectorAll('.link-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
