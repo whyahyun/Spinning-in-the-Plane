@@ -88,7 +88,6 @@
             display: block;
         }
 
-        /* 텍스트 크기 확대 반영 */
         .listen-to {
             font-size: 10.5px;
             font-weight: 800;
@@ -199,10 +198,12 @@
             color: #fff;
         }
 
-        .grid-links {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        /* 음원 사이트 및 인스타 링크 전체를 감싸는 중앙정렬 컨테이너 */
+        .links-container {
+            display: flex;
+            flex-direction: column;
             gap: 6px;
+            align-items: center;
             margin-bottom: 6px;
         }
 
@@ -210,19 +211,22 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 6px;
+            width: 100%;
         }
 
+        /* Spotify 기준 가로 크기(고정 폭) 적용 및 중앙 정렬 */
         .link-btn {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
+            width: 220px; /* Spotify 기준으로 동일하게 고정된 가로 크기 */
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: #1a1a1a;
             text-decoration: none;
-            padding: 8px 6px;
+            padding: 9px 12px;
             border-radius: 10px;
             font-weight: bold;
             font-size: 11.5px;
@@ -231,6 +235,11 @@
             border: 1.5px solid rgba(255, 255, 255, 0.9);
             transition: transform 0.12s ease, background 0.2s;
             white-space: nowrap;
+        }
+
+        /* 인스타그램 버튼은 2분할 그리드 안에서 꽉 차게 조절 */
+        .insta-grid .link-btn {
+            width: 100%;
         }
 
         .link-btn i {
@@ -412,31 +421,33 @@
         
         <div class="divider"></div>
 
-        <div class="grid-links">
+        <!-- 음원 사이트 및 인스타 링크들을 중앙정렬로 하나씩 배치 -->
+        <div class="links-container">
             <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">
                 <i class="fa-brands fa-spotify"></i> Spotify
             </a>
             <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn apple">
-                <i class="fa-brands fa-apple"></i> Apple
+                <i class="fa-brands fa-apple"></i> Apple Music
             </a>
             <a href="https://www.melon.com/album/detail.htm?albumId=14556600" target="_blank" class="link-btn melon">
                 <i class="fa-solid fa-compact-disc"></i> Melon
             </a>
             <a href="https://www.genie.co.kr/detail/albumInfo?axnm=88166077" target="_blank" class="link-btn genie">
-                <i class="fa-solid fa-music"></i> Genie
+                <i class="fa-solid fa-music"></i> Genie Music
             </a>
-            <a href="https://music.bugs.co.kr/album/4155090?wl_ref=list_tr_11_search" target="_blank" class="link-btn bugs" style="grid-column: span 2;">
+            <a href="https://music.bugs.co.kr/album/4155090?wl_ref=list_tr_11_search" target="_blank" class="link-btn bugs">
                 <i class="fa-solid fa-headphones"></i> Bugs
             </a>
-        </div>
 
-        <div class="insta-grid">
-            <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
-                <i class="fa-brands fa-instagram"></i> AGENDA
-            </a>
-            <a href="https://instagram.com/whyahyun" target="_blank" class="link-btn instagram">
-                <i class="fa-brands fa-instagram"></i> WHYAHYUN
-            </a>
+            <!-- 인스타그램 버튼 (한 줄에 2개) -->
+            <div class="insta-grid">
+                <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
+                    <i class="fa-brands fa-instagram"></i> AGENDA
+                </a>
+                <a href="https://instagram.com/whyahyun" target="_blank" class="link-btn instagram">
+                    <i class="fa-brands fa-instagram"></i> WHYAHYUN
+                </a>
+            </div>
         </div>
     </div>
 
