@@ -11,7 +11,10 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #ffffff;
+            /* 3번 아이디어: 싱그러운 그린과 아쿠아 블루가 아주 은은하게 흐르는 배경 애니메이션 */
+            background: linear-gradient(135deg, #f0fff4 0%, #e0f7ff 50%, #f0f8ff 100%);
+            background-size: 200% 200%;
+            animation: gradientFlow 10s ease infinite;
             color: #222;
             font-family: 'Apple SD Gothic Neo', -apple-system, sans-serif;
             text-align: center;
@@ -22,6 +25,13 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+            cursor: default;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
@@ -35,42 +45,53 @@
             box-shadow: 0 20px 50px rgba(0, 150, 200, 0.12), 
                         inset 0 0 25px rgba(255, 255, 255, 0.9);
             border: 2px solid rgba(220, 240, 255, 0.9);
-            
-            /* 접속 시 위에서 부드럽고 매끄럽게 스윽 미끄러져 내려오는 아쿠아 모션 */
             animation: smoothSlideDown 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative;
+            z-index: 2;
         }
 
         @keyframes smoothSlideDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-80px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(-80px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* 앨범 커버 3D 플립 애니메이션 영역 */
+        /* 2번 아이디어: 앨범 커버 3D 플립 + 대각선 유리 반사광(Glass Reflection) 레이어 */
         .art-wrapper {
             perspective: 1000px;
             margin-bottom: 22px;
             display: flex;
             justify-content: center;
+            position: relative;
+        }
+
+        .album-art-container {
+            width: 100%;
+            max-width: 210px;
+            aspect-ratio: 1 / 1;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: flip3D 3s infinite ease-in-out;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
 
         .album-art {
             width: 100%;
-            max-width: 210px;
-            height: auto;
-            aspect-ratio: 1 / 1;
+            height: 100%;
             border-radius: 18px;
             object-fit: cover;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
             border: 2px solid rgba(255, 255, 255, 0.9);
-            
-            transform-style: preserve-3d;
-            animation: flip3D 3s infinite ease-in-out;
+            display: block;
+        }
+
+        /* 유리 반사광 오버레이 효과 */
+        .album-art-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 100%);
+            border-radius: 18px;
+            pointer-events: none;
         }
 
         @keyframes flip3D {
@@ -99,8 +120,86 @@
         p.artist {
             font-size: 13px;
             color: #555;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-weight: 600;
+        }
+
+        /* 4번 아이디어: 더블 싱글 미리듣기 플레이어 & 이퀄라이저 박스 */
+        .preview-player-box {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(230, 245, 255, 0.8));
+            border: 1.5px solid rgba(255, 255, 255, 1);
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 3px rgba(255, 255, 255, 1);
+        }
+
+        .preview-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #0077aa;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 출렁이는 이퀄라이저 파형 애니메이션 */
+        .eq-bars {
+            display: flex;
+            gap: 3px;
+            align-items: flex-end;
+            height: 12px;
+        }
+
+        .eq-bars span {
+            width: 3px;
+            background: #00c756;
+            border-radius: 2px;
+            animation: bounceBar 0.8s infinite ease-in-out alternate;
+        }
+        .eq-bars span:nth-child(2) { animation-delay: 0.2s; height: 8px; }
+        .eq-bars span:nth-child(3) { animation-delay: 0.4s; height: 12px; }
+        .eq-bars span:nth-child(4) { animation-delay: 0.1s; height: 6px; }
+
+        @keyframes bounceBar {
+            0% { height: 4px; }
+            100% { height: 14px; }
+        }
+
+        .track-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .track-btn {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 150, 200, 0.2);
+            border-radius: 10px;
+            padding: 9px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .track-btn span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .track-btn:hover {
+            background: #00c756;
+            color: #fff;
+            border-color: #00c756;
         }
 
         .link-list {
@@ -109,7 +208,7 @@
             gap: 12px;
         }
 
-        /* Frutiger Aero 아크릴 버튼 */
+        /* 아크릴 버튼 스타일 */
         .link-btn {
             display: flex;
             align-items: center;
@@ -117,7 +216,7 @@
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.85) 50%, rgba(225, 240, 250, 0.9) 100%);
             color: #222;
             text-decoration: none;
-            padding: 14px 18px;
+            padding: 13px 18px;
             border-radius: 16px;
             font-weight: bold;
             font-size: 15px;
@@ -146,23 +245,20 @@
                         inset 0 2px 4px rgba(255, 255, 255, 1);
         }
 
-        /* 플랫폼별 아이콘 컬러 */
         .link-btn.spotify i { color: #1DB954; }
         .link-btn.apple i { color: #FA243C; }
         .link-btn.melon i { color: #00CD3C; }
         .link-btn.genie i { color: #002D62; }
         .link-btn.bugs i { color: #FF1D32; }
 
-        /* 구분선 */
         .divider {
             width: 100%;
             height: 1px;
             background: linear-gradient(to right, transparent, rgba(0, 130, 200, 0.25), transparent);
-            margin: 22px 0;
+            margin: 18px 0;
             box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
-        /* 인스타그램 버튼 (한 줄에 2개) */
         .insta-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -171,14 +267,12 @@
 
         .link-btn.instagram { 
             justify-content: center;
-            padding: 14px 10px;
+            padding: 13px 10px;
             font-size: 14px;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.85) 50%, rgba(225, 240, 250, 0.9) 100%);
         }
         
-        .link-btn.instagram i { 
-            color: #E1306C; 
-        }
+        .link-btn.instagram i { color: #E1306C; }
 
         .link-btn.instagram:hover {
             background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 230, 240, 0.95) 100%);
@@ -186,19 +280,97 @@
             box-shadow: 0 10px 22px rgba(225, 48, 108, 0.2),
                         inset 0 2px 4px rgba(255, 255, 255, 1);
         }
+
+        /* 1번 아이디어: 마우스 따라다니는 반짝이는 물방울/별가루 스파크 효과 */
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #ffffff 0%, rgba(0,200,100,0.8) 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 8px #00ff88;
+            animation: sparkleFade 0.6s linear forwards;
+            z-index: 9999;
+        }
+
+        @keyframes sparkleFade {
+            0% { transform: scale(1) translateY(0); opacity: 1; }
+            100% { transform: scale(0.3) translateY(20px); opacity: 0; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- 마우스 스파크 효과 스크립트 -->
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.3) {
+                let sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = e.pageX + 'px';
+                sparkle.style.top = e.pageY + 'px';
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 600);
+            }
+        });
+    </script>
+
     <div class="container">
-        <!-- 3D 플립 애니메이션 앨범 커버 -->
+        <!-- 2번 아이디어: 3D 플립 + 유리 반사광이 들어간 앨범 커버 -->
         <div class="art-wrapper">
-            <img src="cover.png" alt="Spinning In The Plane Artwork" class="album-art">
+            <div class="album-art-container">
+                <img src="cover.png" alt="Spinning In The Plane Artwork" class="album-art">
+            </div>
         </div>
         
         <div class="listen-to">Listen to</div>
         <h1>Spinning in the Plane</h1>
         <p class="artist">by AGENDA, WHYAHYUN</p>
+
+        <!-- 4번 아이디어: 더블 싱글 2트랙 미리듣기 플레이어 & 이퀄라이저 -->
+        <div class="preview-player-box">
+            <div class="preview-title">
+                <span><i class="fa-solid fa-headphones"></i> 30s INSTANT PREVIEW</span>
+                <div class="eq-bars">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+            <div class="track-buttons">
+                <!-- track1.mp3, track2.mp3 파일을 깃허브에 올리면 각각 재생됩니다 -->
+                <button class="track-btn" onclick="playAudio('track1.mp3', this)">
+                    <span><i class="fa-solid fa-play" style="color: #00c756;"></i> Track 1. 거짓말쟁이</span>
+                    <span style="font-size: 10px; color: #777;">Preview</span>
+                </button>
+                <button class="track-btn" onclick="playAudio('track2.mp3', this)">
+                    <span><i class="fa-solid fa-play" style="color: #00c756;"></i> Track 2. 아무래도</span>
+                    <span style="font-size: 10px; color: #777;">Preview</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 오디오 재생을 위한 숨김 태그 -->
+        <audio id="audioPlayer"></audio>
+        <script>
+            let currentAudio = document.getElementById('audioPlayer');
+            function playAudio(file, btn) {
+                if(currentAudio.src.includes(file) && !currentAudio.paused) {
+                    currentAudio.pause();
+                    btn.querySelector('i').className = "fa-solid fa-play";
+                } else {
+                    currentAudio.src = file;
+                    currentAudio.play().then(() => {
+                        document.querySelectorAll('.track-btn i').forEach(i => i.className = "fa-solid fa-play");
+                        btn.querySelector('i').className = "fa-solid fa-pause";
+                    }).catch(e => {
+                        alert("깃허브 저장소에 미리듣기 음원 파일('" + file + "')을 업로드해 주시면 정상적으로 재생됩니다!");
+                    });
+                }
+            }
+            currentAudio.onended = function() {
+                document.querySelectorAll('.track-btn i').forEach(i => i.className = "fa-solid fa-play");
+            };
+        </script>
         
         <div class="link-list">
             <!-- 음원 플랫폼 링크들 -->
