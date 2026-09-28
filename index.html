@@ -11,7 +11,6 @@
             box-sizing: border-box;
         }
         body {
-            /* 1. 배경을 다시 깔끔한 흰색으로 설정 */
             background-color: #ffffff;
             color: #222;
             font-family: 'Apple SD Gothic Neo', -apple-system, sans-serif;
@@ -22,12 +21,12 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
             width: 100%;
             max-width: 400px;
-            /* 3. 전체 테두리도 워터리하고 사이버틱한 글래스 감성 유지 */
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -36,12 +35,27 @@
             box-shadow: 0 20px 50px rgba(0, 150, 200, 0.12), 
                         inset 0 0 25px rgba(255, 255, 255, 0.9);
             border: 2px solid rgba(220, 240, 255, 0.9);
-            animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            
+            /* 접속 시 위에서 액체처럼 흐물흐물 출렁이며 내려오는 애니메이션 */
+            animation: liquidDrop 1.4s cubic-bezier(0.25, 1.56, 0.45, 1) forwards;
         }
 
-        @keyframes fadeInScale {
-            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes liquidDrop {
+            0% {
+                opacity: 0;
+                transform: translateY(-120px) scaleY(0.7) scaleX(1.1);
+            }
+            40% {
+                opacity: 1;
+                transform: translateY(20px) scaleY(1.2) scaleX(0.9); /* 아래로 처졌다가 */
+            }
+            70% {
+                transform: translateY(-10px) scaleY(0.95) scaleX(1.02); /* 위로 살짝 튕김 */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scaleY(1) scaleX(1); /* 제자리 안정 */
+            }
         }
 
         /* 앨범 커버 3D 플립 애니메이션 영역 */
@@ -102,7 +116,7 @@
             gap: 12px;
         }
 
-        /* 2. Frutiger Aero 스타일의 더 불투명하고 광채 나는 아크릴 버튼 */
+        /* Frutiger Aero 스타일 아크릴 버튼 (왼쪽 컬러바 제거) */
         .link-btn {
             display: flex;
             align-items: center;
@@ -114,7 +128,6 @@
             border-radius: 16px;
             font-weight: bold;
             font-size: 15px;
-            /* 물방울 같은 입체감과 상단 하이라이트 광채 효과 */
             box-shadow: 0 6px 18px rgba(0, 130, 200, 0.1),
                         inset 0 2px 3px rgba(255, 255, 255, 1),
                         inset 0 -2px 4px rgba(200, 225, 245, 0.5);
@@ -140,23 +153,14 @@
                         inset 0 2px 4px rgba(255, 255, 255, 1);
         }
 
-        /* 플랫폼별 포인트 컬러 바 */
-        .link-btn.spotify { border-left: 6px solid #1DB954; }
+        /* 플랫폼별 아이콘 컬러 포인트만 은은하게 유지 */
         .link-btn.spotify i { color: #1DB954; }
-        
-        .link-btn.apple { border-left: 6px solid #FA243C; }
         .link-btn.apple i { color: #FA243C; }
-        
-        .link-btn.melon { border-left: 6px solid #00CD3C; }
         .link-btn.melon i { color: #00CD3C; }
-        
-        .link-btn.genie { border-left: 6px solid #002D62; }
         .link-btn.genie i { color: #002D62; }
-        
-        .link-btn.bugs { border-left: 6px solid #FF1D32; }
         .link-btn.bugs i { color: #FF1D32; }
 
-        /* 음원 칸과 인스타 칸 사이의 확실한 분리선 */
+        /* 음원 칸과 인스타 칸 사이의 구분선 */
         .divider {
             width: 100%;
             height: 1px;
@@ -165,7 +169,7 @@
             box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
-        /* 3. 인스타그램 버튼들을 한 줄에 두 개로 나누어 배치하는 그리드 스타일 */
+        /* 인스타그램 버튼 (한 줄에 2개 배치 & 화이트톤 통일) */
         .insta-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -173,19 +177,19 @@
         }
 
         .link-btn.instagram { 
-            border-left: 6px solid #E1306C; 
-            justify-content: center; /* 한 줄에 두 명이므로 가운데 정렬 */
+            justify-content: center;
             padding: 14px 10px;
             font-size: 14px;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 245, 0.85) 50%, rgba(255, 225, 235, 0.9) 100%);
+            /* 붉은 그라데이션 제거 후 맑은 화이트-블루 글래스톤으로 변경 */
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.85) 50%, rgba(225, 240, 250, 0.9) 100%);
         }
         
         .link-btn.instagram i { 
-            color: #E1306C; 
+            color: #E1306C; /* 아이콘만 인스타 고유 컬러 유지 */
         }
 
         .link-btn.instagram:hover {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 220, 230, 0.95) 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 230, 240, 0.95) 100%);
             border-color: #E1306C;
             box-shadow: 0 10px 22px rgba(225, 48, 108, 0.2),
                         inset 0 2px 4px rgba(255, 255, 255, 1);
@@ -227,10 +231,10 @@
                 <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
             </a>
 
-            <!-- 음원 칸과 인스타 칸을 시원하게 갈라주는 구분선 -->
+            <!-- 음원 칸과 인스타 칸을 갈라주는 구분선 -->
             <div class="divider"></div>
 
-            <!-- 인스타그램 버튼 (한 줄에 나란히 2개 배치) -->
+            <!-- 인스타그램 버튼 (한 줄에 나란히 2개 배치, 화이트톤) -->
             <div class="insta-group">
                 <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
                     <span><i class="fa-brands fa-instagram"></i> AGENDA</span>
