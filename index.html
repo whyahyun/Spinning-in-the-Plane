@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Agenda,Whyahyun - Spinning in the Plane [DS]</title>
     
-    <!-- 2. Open Graph (OG) 태그 설정 (카카오톡, 디스코드, SNS 공유 시 예쁜 미리보기 카드 표시) -->
+    <!-- Open Graph (OG) 태그 설정 -->
     <meta property="og:title" content="Agenda,Whyahyun - Spinning in the Plane [DS]">
     <meta property="og:description" content="Double Single Album [Spinning in the Plane] Listen & Streaming Links">
-    <meta property="og:image" content="cover.png"> <!-- 실제 배포 시 절대 경로(https://...)로 수정하시면 더욱 좋습니다 -->
+    <meta property="og:image" content="cover.png">
     
     <!-- 아이콘 사용을 위한 FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -48,19 +48,23 @@
             animation: smoothSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             position: relative;
             z-index: 2;
+            overflow: hidden;
         }
 
+        /* 뒷배경 앨범 커버 (역동적인 애니메이션 및 저음역대 반응 적용) */
         .container::before {
             content: '';
             position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            top: -20px; left: -20px; right: -20px; bottom: -20px;
             background: url('cover.png') no-repeat center center;
             background-size: cover;
-            opacity: 0.2;
-            filter: blur(8px) saturate(1.3);
-            border-radius: 20px;
+            opacity: 0.22;
+            filter: blur(10px) saturate(1.4);
+            border-radius: 30px;
             z-index: -1;
             pointer-events: none;
+            transform: scale(1);
+            transition: transform 0.05s linear;
         }
 
         @keyframes smoothSlideDown {
@@ -75,33 +79,33 @@
             position: relative;
         }
 
+        /* 앨범 커버 사이즈 확대 (max-width: 135px) */
         .album-art-container {
             width: 100%;
-            max-width: 105px;
+            max-width: 135px;
             aspect-ratio: 1 / 1;
             position: relative;
-            border-radius: 12px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
             overflow: hidden;
-            /* 3. 은은한 호흡(숨쉬기) 및 글로우 애니메이션 적용 */
             animation: containerBreath 4s ease-in-out infinite;
         }
 
         @keyframes containerBreath {
             0%, 100% {
                 transform: scale(1);
-                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1), 0 0 0 rgba(0, 199, 86, 0);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12), 0 0 0 rgba(0, 199, 86, 0);
             }
             50% {
                 transform: scale(1.025);
-                box-shadow: 0 10px 22px rgba(0, 150, 200, 0.2), 0 0 12px rgba(0, 199, 86, 0.3);
+                box-shadow: 0 12px 25px rgba(0, 150, 200, 0.22), 0 0 14px rgba(0, 199, 86, 0.35);
             }
         }
 
         .album-art {
             width: 100%;
             height: 100%;
-            border-radius: 12px;
+            border-radius: 14px;
             object-fit: cover;
             border: 2px solid rgba(255, 255, 255, 0.9);
             display: block;
@@ -263,7 +267,7 @@
             margin: 11px 0;
         }
 
-        /* 음원 사이트 버튼 영역 (가로 폭 컴팩트하게 고정 및 중앙 정렬) */
+        /* 음원 사이트 버튼 영역 */
         .links-container {
             display: flex;
             flex-direction: column;
@@ -277,7 +281,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            width: 180px; /* 컴팩트한 고정 폭 */
+            width: 180px;
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -299,7 +303,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 6px;
-            width: 180px; /* 음원 버튼과 동일한 폭 */
+            width: 180px;
             margin: 0 auto;
         }
 
@@ -321,9 +325,8 @@
         .link-btn.genie i { color: #002D62; }
         .link-btn.bugs i { color: #FF1D32; }
         .link-btn.instagram i { color: #E1306C; }
-        .link-btn.share-btn i { color: #007a46; }
 
-        /* 워터리한 물방울(Glass Water Drop) 터치/마우스 효과 */
+        /* 워터리한 물방울 터치 효과 */
         .water-drop {
             position: absolute;
             border-radius: 50%;
@@ -337,15 +340,8 @@
         }
 
         @keyframes waterDropRipple {
-            0% {
-                transform: translate(-50%, -50%) scale(0.2);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(2.5);
-                opacity: 0;
-                filter: blur(2px);
-            }
+            0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; filter: blur(2px); }
         }
     </style>
 </head>
@@ -429,6 +425,7 @@
             let nowPlayingText = document.getElementById('nowPlayingText');
             let progressBar = document.getElementById('previewProgressBar');
             let eqBars = document.querySelectorAll('#realtimeEq span');
+            let containerBg = document.querySelector('.container::before'); // 뒷배경 참조용
 
             let audioCtx, analyser, source, gainNode, dataArray, animationId, fadeTimer;
 
@@ -455,11 +452,26 @@
             function updateVisualizer() {
                 if (!currentAudio.paused) {
                     analyser.getByteFrequencyData(dataArray);
+                    
+                    // 1. 실시간 이퀄라이저 바 업데이트
                     for (let i = 0; i < eqBars.length; i++) {
                         let value = dataArray[i * 2] || 0;
                         let heightPercent = Math.max(3, (value / 255) * 10);
                         eqBars[i].style.height = heightPercent + 'px';
                     }
+
+                    // 2. 저음역대(Low Bass, 인덱스 0~3번 영역) 파형을 추출하여 뒷배경 스케일(역동적 반응)에 반영
+                    let bassSum = 0;
+                    for (let i = 0; i < 4; i++) {
+                        bassSum += dataArray[i];
+                    }
+                    let bassAvg = bassSum / 4; // 0 ~ 255 평균값
+                    let dynamicScale = 1.0 + (bassAvg / 255) * 0.18; // 저음 칠 때마다 최대 18%까지 줌인/줌아웃
+
+                    let bgElement = document.querySelector('.container');
+                    // 가상요소에 직접 스타일을 주기 위해 CSS 변수 또는 transform 조절
+                    bgElement.style.setProperty('--bg-scale', dynamicScale);
+
                     let percent = Math.min(100, (currentAudio.currentTime / 30) * 100);
                     progressBar.style.width = percent + '%';
 
@@ -514,8 +526,7 @@
                 resetPlayerState();
             };
 
-            // 외부 링크 이벤트 처리
-            document.querySelectorAll('.link-btn:not(.share-btn)').forEach(btn => {
+            document.querySelectorAll('.link-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     let targetUrl = this.getAttribute('href');
@@ -524,24 +535,15 @@
                     }, 150);
                 });
             });
-
-            // 1. 링크 복사 기능 함수
-            function copyPageLink() {
-                const url = window.location.href;
-                navigator.clipboard.writeText(url).then(() => {
-                    alert('페이지 링크가 복사되었습니다! 클립보드에 저장되었습니다 ✨');
-                }).catch(err => {
-                    // 클립보드 API가 지원되지 않는 환경 대응
-                    let tempInput = document.createElement('input');
-                    tempInput.value = url;
-                    document.body.appendChild(tempInput);
-                    tempInput.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(tempInput);
-                    alert('페이지 링크가 복사되었습니다!');
-                });
-            }
         </script>
+
+        <style>
+            /* 동적으로 계산된 저음역대 스케일을 뒷배경에 적용하는 스타일 */
+            .container {
+                transform: scale(var(--bg-scale, 1));
+                transition: transform 0.04s ease-out;
+            }
+        </style>
         
         <!-- 구분선 -->
         <div class="divider"></div>
@@ -563,10 +565,6 @@
             <a href="https://music.bugs.co.kr/album/4155090?wl_ref=list_tr_11_search" target="_blank" class="link-btn bugs">
                 <i class="fa-solid fa-headphones"></i> Bugs
             </a>
-            <!-- 1. 링크 복사 버튼 추가 -->
-            <button class="link-btn share-btn" onclick="copyPageLink()">
-                <i class="fa-solid fa-link"></i> Copy Page Link
-            </button>
         </div>
 
         <!-- 구분선 -->
