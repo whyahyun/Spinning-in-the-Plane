@@ -36,25 +36,18 @@
                         inset 0 0 25px rgba(255, 255, 255, 0.9);
             border: 2px solid rgba(220, 240, 255, 0.9);
             
-            /* 접속 시 위에서 액체처럼 흐물흐물 출렁이며 내려오는 애니메이션 */
-            animation: liquidDrop 1.4s cubic-bezier(0.25, 1.56, 0.45, 1) forwards;
+            /* 접속 시 위에서 부드럽고 매끄럽게 스윽 미끄러져 내려오는 아쿠아 모션 */
+            animation: smoothSlideDown 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes liquidDrop {
+        @keyframes smoothSlideDown {
             0% {
                 opacity: 0;
-                transform: translateY(-120px) scaleY(0.7) scaleX(1.1);
-            }
-            40% {
-                opacity: 1;
-                transform: translateY(20px) scaleY(1.2) scaleX(0.9); /* 아래로 처졌다가 */
-            }
-            70% {
-                transform: translateY(-10px) scaleY(0.95) scaleX(1.02); /* 위로 살짝 튕김 */
+                transform: translateY(-80px);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0) scaleY(1) scaleX(1); /* 제자리 안정 */
+                transform: translateY(0);
             }
         }
 
@@ -116,7 +109,7 @@
             gap: 12px;
         }
 
-        /* Frutiger Aero 스타일 아크릴 버튼 (왼쪽 컬러바 제거) */
+        /* Frutiger Aero 아크릴 버튼 */
         .link-btn {
             display: flex;
             align-items: center;
@@ -153,14 +146,14 @@
                         inset 0 2px 4px rgba(255, 255, 255, 1);
         }
 
-        /* 플랫폼별 아이콘 컬러 포인트만 은은하게 유지 */
+        /* 플랫폼별 아이콘 컬러 */
         .link-btn.spotify i { color: #1DB954; }
         .link-btn.apple i { color: #FA243C; }
         .link-btn.melon i { color: #00CD3C; }
         .link-btn.genie i { color: #002D62; }
         .link-btn.bugs i { color: #FF1D32; }
 
-        /* 음원 칸과 인스타 칸 사이의 구분선 */
+        /* 구분선 */
         .divider {
             width: 100%;
             height: 1px;
@@ -169,7 +162,7 @@
             box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
-        /* 인스타그램 버튼 (한 줄에 2개 배치 & 화이트톤 통일) */
+        /* 인스타그램 버튼 (한 줄에 2개) */
         .insta-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -180,12 +173,11 @@
             justify-content: center;
             padding: 14px 10px;
             font-size: 14px;
-            /* 붉은 그라데이션 제거 후 맑은 화이트-블루 글래스톤으로 변경 */
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.85) 50%, rgba(225, 240, 250, 0.9) 100%);
         }
         
         .link-btn.instagram i { 
-            color: #E1306C; /* 아이콘만 인스타 고유 컬러 유지 */
+            color: #E1306C; 
         }
 
         .link-btn.instagram:hover {
@@ -231,10 +223,10 @@
                 <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
             </a>
 
-            <!-- 음원 칸과 인스타 칸을 갈라주는 구분선 -->
+            <!-- 구분선 -->
             <div class="divider"></div>
 
-            <!-- 인스타그램 버튼 (한 줄에 나란히 2개 배치, 화이트톤) -->
+            <!-- 인스타그램 버튼 (한 줄에 2개) -->
             <div class="insta-group">
                 <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
                     <span><i class="fa-brands fa-instagram"></i> AGENDA</span>
