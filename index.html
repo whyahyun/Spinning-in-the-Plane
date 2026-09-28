@@ -9,7 +9,7 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #d6f2ff;
+            background: linear-gradient(135deg, #d6f2ff 0%, #b8e4f9 100%);
             color: #222;
             font-family: 'Apple SD Gothic Neo', -apple-system, sans-serif;
             text-align: center;
@@ -23,66 +23,116 @@
         .container {
             width: 100%;
             max-width: 380px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
             padding: 30px 20px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 130, 190, 0.15);
+            border-radius: 28px;
+            box-shadow: 0 15px 35px rgba(0, 130, 190, 0.18);
             border: 3px solid #00c756;
+            
+            /* 등장 애니메이션 효과 */
+            animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .album-art {
+            width: 100%;
+            max-width: 210px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+            border: 2px solid #fff;
+            
+            /* 앨범 커버 살짝 숨쉬는 듯한 부드러운 애니메이션 */
+            animation: floatArt 4s ease-in-out infinite;
+        }
+
+        @keyframes floatArt {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .listen-to {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            color: #00a844;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
         h1 {
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 800;
-            margin: 15px 0 5px;
+            margin: 0 0 8px;
             color: #111;
+            letter-spacing: -0.5px;
         }
-        p {
-            font-size: 14px;
-            color: #555;
+
+        p.artist {
+            font-size: 13px;
+            color: #666;
             margin-bottom: 25px;
             font-weight: 600;
         }
+
         .link-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
+
         .link-btn {
             display: block;
             background: #ffffff;
             color: #222;
             text-decoration: none;
             padding: 14px;
-            border-radius: 12px;
+            border-radius: 14px;
             font-weight: bold;
             font-size: 15px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
             border: 1.5px solid #eee;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
+
         .link-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
             border-color: #00c756;
             background: #f4fff7;
+            box-shadow: 0 6px 15px rgba(0, 199, 86, 0.15);
         }
+
+        /* 플랫폼별 포인트 컬러 바 */
         .link-btn.spotify { border-left: 6px solid #1DB954; }
         .link-btn.apple { border-left: 6px solid #FA243C; }
         .link-btn.melon { border-left: 6px solid #00CD3C; }
         .link-btn.genie { border-left: 6px solid #002D62; }
         .link-btn.bugs { border-left: 6px solid #FF1D32; }
-
-        .footer {
-            margin-top: 25px;
-            font-size: 11px;
-            color: #888;
-            letter-spacing: 1.5px;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Spinning In The Plane</h1>
-        <p>Agenda & Whyahyun</p>
+        <!-- 앨범 커버 이미지 (파일명을 cover.jpg로 올리면 자동 연동됩니다) -->
+        <img src="cover.jpg" alt="Spinning In The Plane Artwork" class="album-art">
+        
+        <div class="listen-to">Listen to</div>
+        <h1>Spinning in the Plane</h1>
+        <p class="artist">by AGENDA, WHYAHYUN</p>
         
         <div class="link-list">
             <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">Spotify</a>
@@ -90,10 +140,6 @@
             <a href="https://www.melon.com/album/detail.htm?albumId=14556600" target="_blank" class="link-btn melon">Melon</a>
             <a href="https://www.genie.co.kr/detail/albumInfo?axnm=88166077" target="_blank" class="link-btn genie">Genie</a>
             <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn bugs">Bugs</a>
-        </div>
-
-        <div class="footer">
-            WHYAHYUN OFFICIAL
         </div>
     </div>
 
