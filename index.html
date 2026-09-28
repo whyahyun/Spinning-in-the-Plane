@@ -11,8 +11,8 @@
             box-sizing: border-box;
         }
         body {
-            /* 푸릇하고 맑은 프루티거 아에로 스타일의 아쿠아 그라데이션 배경 */
-            background: linear-gradient(135deg, #e0f7ff 0%, #b5e2ff 50%, #d4ffed 100%);
+            /* 1. 배경을 다시 깔끔한 흰색으로 설정 */
+            background-color: #ffffff;
             color: #222;
             font-family: 'Apple SD Gothic Neo', -apple-system, sans-serif;
             text-align: center;
@@ -26,16 +26,16 @@
 
         .container {
             width: 100%;
-            max-width: 390px;
-            /* 물처럼 투명하고 영롱한 글래스모피즘 효과 */
-            background: rgba(255, 255, 255, 0.45);
+            max-width: 400px;
+            /* 3. 전체 테두리도 워터리하고 사이버틱한 글래스 감성 유지 */
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            padding: 30px 22px;
+            padding: 32px 22px;
             border-radius: 32px;
-            box-shadow: 0 20px 45px rgba(0, 140, 200, 0.15), 
-                        inset 0 0 20px rgba(255, 255, 255, 0.8);
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 50px rgba(0, 150, 200, 0.12), 
+                        inset 0 0 25px rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(220, 240, 255, 0.9);
             animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
@@ -44,7 +44,7 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* 앨범 커버를 감싸는 3D 공간 설정 */
+        /* 앨범 커버 3D 플립 애니메이션 영역 */
         .art-wrapper {
             perspective: 1000px;
             margin-bottom: 22px;
@@ -59,18 +59,17 @@
             aspect-ratio: 1 / 1;
             border-radius: 18px;
             object-fit: cover;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
             border: 2px solid rgba(255, 255, 255, 0.9);
             
-            /* 3초마다 3D로 한 바퀴 휙 도는 플립 애니메이션 */
             transform-style: preserve-3d;
             animation: flip3D 3s infinite ease-in-out;
         }
 
         @keyframes flip3D {
             0% { transform: rotateY(0deg); }
-            70% { transform: rotateY(360deg); } /* 한바퀴 돌고 */
-            100% { transform: rotateY(360deg); } /* 잠깐 멈추는 타임 */
+            70% { transform: rotateY(360deg); }
+            100% { transform: rotateY(360deg); }
         }
 
         .listen-to {
@@ -103,23 +102,24 @@
             gap: 12px;
         }
 
-        /* Frutiger Aero 입체감 스타일 버튼 */
+        /* 2. Frutiger Aero 스타일의 더 불투명하고 광채 나는 아크릴 버튼 */
         .link-btn {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.85) 50%, rgba(225, 240, 250, 0.9) 100%);
             color: #222;
             text-decoration: none;
             padding: 14px 18px;
             border-radius: 16px;
             font-weight: bold;
             font-size: 15px;
-            box-shadow: 0 6px 15px rgba(0, 120, 180, 0.08),
-                        inset 0 1px 0 rgba(255, 255, 255, 1);
-            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            /* 물방울 같은 입체감과 상단 하이라이트 광채 효과 */
+            box-shadow: 0 6px 18px rgba(0, 130, 200, 0.1),
+                        inset 0 2px 3px rgba(255, 255, 255, 1),
+                        inset 0 -2px 4px rgba(200, 225, 245, 0.5);
+            border: 1.5px solid rgba(255, 255, 255, 1);
             transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
-            backdrop-filter: blur(5px);
         }
 
         .link-btn span {
@@ -134,10 +134,10 @@
 
         .link-btn:hover {
             transform: translateY(-3px) scale(1.02);
-            background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(240,255,248,0.9));
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(230, 255, 240, 0.95) 100%);
             border-color: #00c756;
-            box-shadow: 0 8px 20px rgba(0, 199, 86, 0.2),
-                        inset 0 1px 0 rgba(255, 255, 255, 1);
+            box-shadow: 0 10px 22px rgba(0, 199, 86, 0.2),
+                        inset 0 2px 4px rgba(255, 255, 255, 1);
         }
 
         /* 플랫폼별 포인트 컬러 바 */
@@ -156,39 +156,46 @@
         .link-btn.bugs { border-left: 6px solid #FF1D32; }
         .link-btn.bugs i { color: #FF1D32; }
 
-        /* 음원 칸과 인스타 칸을 확실하게 분리해 주는 구역선 */
+        /* 음원 칸과 인스타 칸 사이의 확실한 분리선 */
         .divider {
             width: 100%;
             height: 1px;
-            background: rgba(0, 120, 180, 0.15);
-            margin: 20px 0;
-            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+            background: linear-gradient(to right, transparent, rgba(0, 130, 200, 0.25), transparent);
+            margin: 22px 0;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
-        /* 인스타그램 버튼 전용 스타일 */
+        /* 3. 인스타그램 버튼들을 한 줄에 두 개로 나누어 배치하는 그리드 스타일 */
+        .insta-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
         .link-btn.instagram { 
             border-left: 6px solid #E1306C; 
-            background: linear-gradient(to bottom, rgba(255,250,252,0.9), rgba(255,240,245,0.7));
+            justify-content: center; /* 한 줄에 두 명이므로 가운데 정렬 */
+            padding: 14px 10px;
+            font-size: 14px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 245, 0.85) 50%, rgba(255, 225, 235, 0.9) 100%);
         }
-        .link-btn.instagram i { color: #E1306C; }
-        .link-btn.instagram:hover {
-            background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,230,240,0.9));
-            border-color: #E1306C;
-            box-shadow: 0 8px 20px rgba(225, 48, 108, 0.2),
-                        inset 0 1px 0 rgba(255, 255, 255, 1);
+        
+        .link-btn.instagram i { 
+            color: #E1306C; 
         }
 
-        .insta-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .link-btn.instagram:hover {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 220, 230, 0.95) 100%);
+            border-color: #E1306C;
+            box-shadow: 0 10px 22px rgba(225, 48, 108, 0.2),
+                        inset 0 2px 4px rgba(255, 255, 255, 1);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- 3D 플립 애니메이션이 적용된 앨범 커버 영역 -->
+        <!-- 3D 플립 애니메이션 앨범 커버 -->
         <div class="art-wrapper">
             <img src="cover.png" alt="Spinning In The Plane Artwork" class="album-art">
         </div>
@@ -220,18 +227,16 @@
                 <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
             </a>
 
-            <!-- 음원 칸과 확실하게 분리해주는 워터리한 구분선 -->
+            <!-- 음원 칸과 인스타 칸을 시원하게 갈라주는 구분선 -->
             <div class="divider"></div>
 
-            <!-- 인스타그램 버튼 그룹 -->
+            <!-- 인스타그램 버튼 (한 줄에 나란히 2개 배치) -->
             <div class="insta-group">
                 <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
                     <span><i class="fa-brands fa-instagram"></i> AGENDA</span>
-                    <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
                 </a>
                 <a href="https://instagram.com/whyahyun" target="_blank" class="link-btn instagram">
                     <span><i class="fa-brands fa-instagram"></i> WHYAHYUN</span>
-                    <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #aaa;"></i>
                 </a>
             </div>
         </div>
