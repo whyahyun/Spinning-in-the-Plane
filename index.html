@@ -33,7 +33,7 @@
             background: rgba(255, 255, 255, 0.55);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 14px 14px 12px 14px;
+            padding: 16px 14px 14px 14px;
             border-radius: 24px;
             box-shadow: 0 16px 40px rgba(0, 100, 150, 0.15), 
                         inset 0 0 25px rgba(255, 255, 255, 0.9),
@@ -63,7 +63,7 @@
         }
 
         .art-wrapper {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: center;
             position: relative;
@@ -71,7 +71,7 @@
 
         .album-art-container {
             width: 100%;
-            max-width: 120px;
+            max-width: 130px;
             aspect-ratio: 1 / 1;
             position: relative;
             border-radius: 14px;
@@ -88,30 +88,32 @@
             display: block;
         }
 
+        /* 텍스트 크기 확대 반영 */
         .listen-to {
-            font-size: 8.5px;
+            font-size: 10.5px;
             font-weight: 800;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             color: #007a46;
             text-transform: uppercase;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
             text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
         h1 {
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 800;
-            margin: 0 0 2px;
+            margin: 0 0 3px;
             color: #111;
             letter-spacing: -0.5px;
             text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
         p.artist {
-            font-size: 10.5px;
-            color: #333;
-            margin-bottom: 8px;
-            font-weight: 600;
+            font-size: 13px;
+            color: #222;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
             text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
@@ -128,7 +130,6 @@
             text-align: center;
         }
 
-        /* 2번 요청: 투명한 배경의 상태 표시창 */
         .visualizer-screen {
             background: rgba(255, 255, 255, 0.4);
             border-radius: 6px;
@@ -166,7 +167,6 @@
             transition: height 0.02s ease;
         }
 
-        /* 1번 요청: 트랙 버튼 2개 나란히 배치 */
         .track-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -199,7 +199,6 @@
             color: #fff;
         }
 
-        /* 3번 요청: 음원 플랫폼 및 인스타 그리드 (중앙정렬, 딱 맞는 크기) */
         .grid-links {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -256,7 +255,6 @@
             margin: 8px 0;
         }
 
-        /* 터치/마우스 블러리한 하늘색 큰 원 효과 */
         .blur-sparkle {
             position: absolute;
             width: 60px;
@@ -278,7 +276,6 @@
 </head>
 <body>
 
-    <!-- 터치 및 마우스 블러리 하늘색 원 효과 스크립트 -->
     <script>
         function createBlurSparkle(x, y) {
             if (Math.random() > 0.3) {
@@ -321,7 +318,6 @@
 
         <!-- AGWA_PREVIEW 미니 플레이어 칸 -->
         <div class="preview-player-box">
-            <!-- 투명한 상태 표시창 -->
             <div class="visualizer-screen">
                 <span class="now-playing-label" id="nowPlayingText">STANDBY</span>
                 <div class="realtime-eq" id="realtimeEq">
@@ -329,7 +325,6 @@
                 </div>
             </div>
 
-            <!-- 1번, 2번 트랙 한 줄(2분할) 배치 -->
             <div class="track-buttons">
                 <button class="track-btn" onclick="playAudio('track1.mp3', '01. 거짓말쟁이', this)">
                     <i class="fa-solid fa-play" style="color: #00c756;"></i> 1. 거짓말쟁이
@@ -340,7 +335,6 @@
             </div>
         </div>
 
-        <!-- 오디오 재생 및 분석 스크립트 -->
         <audio id="audioPlayer" crossorigin="anonymous"></audio>
         <script>
             let currentAudio = document.getElementById('audioPlayer');
@@ -418,7 +412,6 @@
         
         <div class="divider"></div>
 
-        <!-- 음원 플랫폼 버튼들 (플랫폼 이름 크기에 맞춘 컴팩트한 중앙정렬 그리드) -->
         <div class="grid-links">
             <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">
                 <i class="fa-brands fa-spotify"></i> Spotify
@@ -437,7 +430,6 @@
             </a>
         </div>
 
-        <!-- 인스타그램 버튼 (한 줄에 2개) -->
         <div class="insta-grid">
             <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
                 <i class="fa-brands fa-instagram"></i> AGENDA
