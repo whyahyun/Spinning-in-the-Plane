@@ -16,7 +16,7 @@
             color: #1a2e26;
             font-family: 'Apple SD Gothic Neo', -apple-system, sans-serif;
             text-align: center;
-            padding: 10px 12px;
+            padding: 6px 10px;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -29,12 +29,12 @@
 
         .container {
             width: 100%;
-            max-width: 380px;
+            max-width: 360px;
             background: rgba(255, 255, 255, 0.55);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 16px 14px 14px 14px;
-            border-radius: 24px;
+            padding: 12px 12px 10px 12px;
+            border-radius: 22px;
             box-shadow: 0 16px 40px rgba(0, 100, 150, 0.15), 
                         inset 0 0 25px rgba(255, 255, 255, 0.9),
                         inset 0 0 5px rgba(255, 255, 255, 1);
@@ -52,7 +52,7 @@
             background-size: cover;
             opacity: 0.2;
             filter: blur(8px) saturate(1.3);
-            border-radius: 20px;
+            border-radius: 18px;
             z-index: -1;
             pointer-events: none;
         }
@@ -63,7 +63,7 @@
         }
 
         .art-wrapper {
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             display: flex;
             justify-content: center;
             position: relative;
@@ -71,73 +71,93 @@
 
         .album-art-container {
             width: 100%;
-            max-width: 130px;
+            max-width: 110px;
             aspect-ratio: 1 / 1;
             position: relative;
-            border-radius: 14px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
         .album-art {
             width: 100%;
             height: 100%;
-            border-radius: 14px;
+            border-radius: 12px;
             object-fit: cover;
             border: 2px solid rgba(255, 255, 255, 0.9);
             display: block;
         }
 
         .listen-to {
-            font-size: 10.5px;
+            font-size: 9.5px;
             font-weight: 800;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             color: #007a46;
             text-transform: uppercase;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
             text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
         h1 {
-            font-size: 20px;
+            font-size: 17.5px;
             font-weight: 800;
-            margin: 0 0 3px;
+            margin: 0 0 2px;
             color: #111;
             letter-spacing: -0.5px;
             text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
         p.artist {
-            font-size: 13px;
+            font-size: 12px;
             color: #222;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             font-weight: 700;
             letter-spacing: -0.2px;
             text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
+        /* 30초 프리뷰 플레이어 박스 */
         .preview-player-box {
-            background: rgba(240, 250, 255, 0.65);
+            background: rgba(240, 250, 255, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            border: 1.5px solid rgba(255, 255, 255, 0.95);
             border-radius: 12px;
             padding: 7px 9px;
-            margin-bottom: 8px;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.95),
-                        0 4px 12px rgba(0, 100, 150, 0.05);
+            margin-bottom: 2px;
+            box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.95),
+                        0 4px 12px rgba(0, 100, 150, 0.06);
             text-align: center;
         }
 
-        .visualizer-screen {
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 6px;
-            padding: 4px 8px;
-            margin-bottom: 6px;
+        .preview-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 5px;
+            padding: 0 2px;
+        }
+
+        .preview-badge {
+            font-size: 8.5px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #fff;
+            background: #009955;
+            padding: 2px 5px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .visualizer-screen {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+            padding: 4px 8px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.85);
         }
 
         .now-playing-label {
@@ -148,7 +168,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 180px;
+            max-width: 150px;
         }
 
         .realtime-eq {
@@ -166,26 +186,43 @@
             transition: height 0.02s ease;
         }
 
+        .preview-progress-container {
+            width: 100%;
+            height: 3.5px;
+            background: rgba(0, 0, 0, 0.06);
+            border-radius: 2px;
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+
+        .preview-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #00c756;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
         .track-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5px;
+            gap: 4px;
         }
 
         .track-btn {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(6px);
             border: 1px solid rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            padding: 6px 4px;
-            font-size: 10.5px;
+            border-radius: 7px;
+            padding: 5px 3px;
+            font-size: 10px;
             font-weight: 700;
             color: #222;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 4px;
             transition: all 0.12s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.02), inset 0 1px 2px rgba(255,255,255,0.9);
             white-space: nowrap;
@@ -198,52 +235,60 @@
             color: #fff;
         }
 
-        /* 음원 사이트 및 인스타 링크 전체를 감싸는 중앙정렬 컨테이너 */
+        /* 구분선 디자인 (간격을 더 길고 여유롭게 확보) */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(0, 130, 200, 0.25), transparent);
+            margin: 7px 0;
+        }
+
+        /* 음원 사이트 버튼 그룹 (가로 폭을 줄이고 2열 그리드로 아담하게 배치) */
         .links-container {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
             align-items: center;
-            margin-bottom: 6px;
         }
 
-        .insta-grid {
+        .streaming-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px;
+            gap: 5px;
             width: 100%;
         }
 
-        /* Spotify 기준 가로 크기(고정 폭) 적용 및 중앙 정렬 */
         .link-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            width: 220px; /* Spotify 기준으로 동일하게 고정된 가로 크기 */
+            gap: 6px;
+            width: 100%;
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: #1a1a1a;
             text-decoration: none;
-            padding: 9px 12px;
-            border-radius: 10px;
+            padding: 6px 8px;
+            border-radius: 8px;
             font-weight: bold;
-            font-size: 11.5px;
-            box-shadow: 0 3px 10px rgba(0, 120, 180, 0.05),
+            font-size: 10.5px;
+            box-shadow: 0 2px 8px rgba(0, 120, 180, 0.04),
                         inset 0 1px 3px rgba(255, 255, 255, 0.9);
             border: 1.5px solid rgba(255, 255, 255, 0.9);
             transition: transform 0.12s ease, background 0.2s;
             white-space: nowrap;
         }
 
-        /* 인스타그램 버튼은 2분할 그리드 안에서 꽉 차게 조절 */
-        .insta-grid .link-btn {
+        .insta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
             width: 100%;
         }
 
         .link-btn i {
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .link-btn:active {
@@ -256,13 +301,6 @@
         .link-btn.genie i { color: #002D62; }
         .link-btn.bugs i { color: #FF1D32; }
         .link-btn.instagram i { color: #E1306C; }
-
-        .divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(0, 130, 200, 0.25), transparent);
-            margin: 8px 0;
-        }
 
         .blur-sparkle {
             position: absolute;
@@ -325,13 +363,23 @@
         <h1>Spinning in the Plane</h1>
         <p class="artist">by AGENDA, WHYAHYUN</p>
 
-        <!-- AGWA_PREVIEW 미니 플레이어 칸 -->
+        <!-- 30초 프리뷰 플레이어 전용 영역 -->
         <div class="preview-player-box">
-            <div class="visualizer-screen">
+            <div class="preview-header">
+                <span class="preview-badge"><i class="fa-solid fa-headphones"></i> 30s Preview</span>
                 <span class="now-playing-label" id="nowPlayingText">STANDBY</span>
+            </div>
+
+            <div class="visualizer-screen">
+                <span style="font-size: 8.5px; color: #444; font-weight: bold;">EQ SPECTRUM</span>
                 <div class="realtime-eq" id="realtimeEq">
                     <span></span><span></span><span></span><span></span><span></span>
                 </div>
+            </div>
+
+            <!-- 30초 진행률 바 -->
+            <div class="preview-progress-container">
+                <div class="preview-progress-bar" id="previewProgressBar"></div>
             </div>
 
             <div class="track-buttons">
@@ -348,17 +396,23 @@
         <script>
             let currentAudio = document.getElementById('audioPlayer');
             let nowPlayingText = document.getElementById('nowPlayingText');
+            let progressBar = document.getElementById('previewProgressBar');
             let eqBars = document.querySelectorAll('#realtimeEq span');
 
-            let audioCtx, analyser, source, dataArray, animationId;
+            let audioCtx, analyser, source, gainNode, dataArray, animationId, fadeTimer;
 
             function initAudioAPI() {
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                     analyser = audioCtx.createAnalyser();
+                    gainNode = audioCtx.createGain();
+                    
                     source = audioCtx.createMediaElementSource(currentAudio);
-                    source.connect(analyser);
+                    
+                    source.connect(gainNode);
+                    gainNode.connect(analyser);
                     analyser.connect(audioCtx.destination);
+                    
                     analyser.fftSize = 128;
                     dataArray = new Uint8Array(analyser.frequencyBinCount);
                 }
@@ -375,26 +429,50 @@
                         let heightPercent = Math.max(3, (value / 255) * 10);
                         eqBars[i].style.height = heightPercent + 'px';
                     }
+                    let percent = Math.min(100, (currentAudio.currentTime / 30) * 100);
+                    progressBar.style.width = percent + '%';
+
                     animationId = requestAnimationFrame(updateVisualizer);
                 }
             }
 
+            function resetPlayerState() {
+                if (fadeTimer) clearTimeout(fadeTimer);
+                if (gainNode) gainNode.gain.setValueAtTime(1.0, audioCtx ? audioCtx.currentTime : 0);
+                cancelAnimationFrame(animationId);
+                document.querySelectorAll('.track-btn i').forEach(i => i.className = "fa-solid fa-play");
+                nowPlayingText.innerText = "STANDBY";
+                progressBar.style.width = '0%';
+                eqBars.forEach(bar => bar.style.height = '3px');
+            }
+
             function playAudio(file, trackInfo, btn) {
                 initAudioAPI();
+                resetPlayerState();
 
                 if(currentAudio.src.includes(file) && !currentAudio.paused) {
                     currentAudio.pause();
-                    btn.querySelector('i').className = "fa-solid fa-play";
-                    cancelAnimationFrame(animationId);
-                    nowPlayingText.innerText = "PAUSED";
                 } else {
                     currentAudio.src = file;
+                    currentAudio.currentTime = 0;
                     currentAudio.play().then(() => {
-                        document.querySelectorAll('.track-btn i').forEach(i => i.className = "fa-solid fa-play");
                         btn.querySelector('i').className = "fa-solid fa-pause";
                         nowPlayingText.innerText = trackInfo;
-                        cancelAnimationFrame(animationId);
                         updateVisualizer();
+
+                        fadeTimer = setTimeout(() => {
+                            if (!currentAudio.paused) {
+                                let now = audioCtx.currentTime;
+                                gainNode.gain.setValueAtTime(1.0, now);
+                                gainNode.gain.linearRampToValueAtTime(0.0, now + 3.0);
+
+                                setTimeout(() => {
+                                    currentAudio.pause();
+                                    resetPlayerState();
+                                }, 3000);
+                            }
+                        }, 27000);
+
                     }).catch(e => {
                         alert("깃허브 저장소에 미리듣기 음원 파일('" + file + "')을 업로드해 주시면 정상적으로 재생됩니다!");
                     });
@@ -402,10 +480,7 @@
             }
             
             currentAudio.onended = function() {
-                document.querySelectorAll('.track-btn i').forEach(i => i.className = "fa-solid fa-play");
-                cancelAnimationFrame(animationId);
-                nowPlayingText.innerText = "STANDBY";
-                eqBars.forEach(bar => bar.style.height = '3px');
+                resetPlayerState();
             };
 
             document.querySelectorAll('.link-btn').forEach(btn => {
@@ -419,35 +494,43 @@
             });
         </script>
         
+        <!-- 첫 번째 구분선: PREVIEW와 음원 사이트 사이 -->
         <div class="divider"></div>
 
-        <!-- 음원 사이트 및 인스타 링크들을 중앙정렬로 하나씩 배치 -->
+        <!-- 음원 사이트 영역 (2열 격자 구조로 가로 폭 축소) -->
         <div class="links-container">
-            <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">
-                <i class="fa-brands fa-spotify"></i> Spotify
-            </a>
-            <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn apple">
-                <i class="fa-brands fa-apple"></i> Apple Music
-            </a>
-            <a href="https://www.melon.com/album/detail.htm?albumId=14556600" target="_blank" class="link-btn melon">
-                <i class="fa-solid fa-compact-disc"></i> Melon
-            </a>
-            <a href="https://www.genie.co.kr/detail/albumInfo?axnm=88166077" target="_blank" class="link-btn genie">
-                <i class="fa-solid fa-music"></i> Genie Music
-            </a>
-            <a href="https://music.bugs.co.kr/album/4155090?wl_ref=list_tr_11_search" target="_blank" class="link-btn bugs">
-                <i class="fa-solid fa-headphones"></i> Bugs
-            </a>
-
-            <!-- 인스타그램 버튼 (한 줄에 2개) -->
-            <div class="insta-grid">
-                <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
-                    <i class="fa-brands fa-instagram"></i> AGENDA
+            <div class="streaming-grid">
+                <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">
+                    <i class="fa-brands fa-spotify"></i> Spotify
                 </a>
-                <a href="https://instagram.com/whyahyun" target="_blank" class="link-btn instagram">
-                    <i class="fa-brands fa-instagram"></i> WHYAHYUN
+                <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn apple">
+                    <i class="fa-brands fa-apple"></i> Apple Music
+                </a>
+                <a href="https://www.melon.com/album/detail.htm?albumId=14556600" target="_blank" class="link-btn melon">
+                    <i class="fa-solid fa-compact-disc"></i> Melon
+                </a>
+                <a href="https://www.genie.co.kr/detail/albumInfo?axnm=88166077" target="_blank" class="link-btn genie">
+                    <i class="fa-solid fa-music"></i> Genie Music
                 </a>
             </div>
+            <div style="width: 50%; display: flex; justify-content: center; margin-top: 4px;">
+                <a href="https://music.bugs.co.kr/album/4155090?wl_ref=list_tr_11_search" target="_blank" class="link-btn bugs">
+                    <i class="fa-solid fa-headphones"></i> Bugs
+                </a>
+            </div>
+        </div>
+
+        <!-- 두 번째 구분선: 음원 사이트와 인스타 소개 사이 -->
+        <div class="divider"></div>
+
+        <!-- 아티스트 인스타 소개 영역 -->
+        <div class="insta-grid">
+            <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
+                <i class="fa-brands fa-instagram"></i> AGENDA
+            </a>
+            <a href="https://instagram.com/whyahyun" target="_blank" class="link-btn instagram">
+                <i class="fa-brands fa-instagram"></i> WHYAHYUN
+            </a>
         </div>
     </div>
 
