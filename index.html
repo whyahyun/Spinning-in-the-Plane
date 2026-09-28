@@ -51,20 +51,20 @@
             overflow: hidden;
         }
 
-        /* 뒷배경 앨범 커버 (역동적인 애니메이션 및 저음역대 반응 적용) */
+        /* 뒷배경 앨범 커버 (오디오 저음 비트에 맞춰 역동적으로 스케일 조절) */
         .container::before {
             content: '';
             position: absolute;
-            top: -20px; left: -20px; right: -20px; bottom: -20px;
+            top: -30px; left: -30px; right: -30px; bottom: -30px;
             background: url('cover.png') no-repeat center center;
             background-size: cover;
             opacity: 0.22;
-            filter: blur(10px) saturate(1.4);
-            border-radius: 30px;
+            filter: blur(12px) saturate(1.4);
+            border-radius: 35px;
             z-index: -1;
             pointer-events: none;
-            transform: scale(1);
-            transition: transform 0.05s linear;
+            transform: scale(var(--bg-scale, 1));
+            transition: transform 0.04s ease-out;
         }
 
         @keyframes smoothSlideDown {
@@ -79,7 +79,6 @@
             position: relative;
         }
 
-        /* 앨범 커버 사이즈 확대 (max-width: 135px) */
         .album-art-container {
             width: 100%;
             max-width: 135px;
@@ -257,6 +256,7 @@
         .track-btn:active {
             background: rgba(0, 199, 86, 0.85);
             color: #fff;
+            transform: scale(0.93);
         }
 
         /* 구분선 */
@@ -276,6 +276,7 @@
             width: 100%;
         }
 
+        /* 물방울(또잉!) 탄성 클릭 애니메이션 적용 */
         .link-btn {
             display: inline-flex;
             align-items: center;
@@ -294,9 +295,26 @@
             box-shadow: 0 2px 8px rgba(0, 120, 180, 0.04),
                         inset 0 1px 3px rgba(255, 255, 255, 0.9);
             border: 1.5px solid rgba(255, 255, 255, 0.9);
-            transition: transform 0.12s ease, background 0.2s;
             white-space: nowrap;
             cursor: pointer;
+            transform-origin: center center;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        /* 클릭(터치) 순간 물방울처럼 볼록해졌다가 튕기는 '또잉!' 키프레임 애니메이션 */
+        .link-btn.clicked {
+            animation: waterBounce 0.4s cubic-bezier(0.36, 1.6, 0.4, 1) forwards;
+        }
+
+        @keyframes waterBounce {
+            0% { transform: scale(1); }
+            35% { 
+                transform: scale(1.12) translateY(-2px); 
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 8px 20px rgba(0, 160, 255, 0.3), inset 0 0 8px rgba(255, 255, 255, 1);
+            }
+            70% { transform: scale(0.95); }
+            100% { transform: scale(1); }
         }
 
         .insta-grid {
@@ -313,10 +331,6 @@
 
         .link-btn i {
             font-size: 13px;
-        }
-
-        .link-btn:active {
-            transform: scale(0.95);
         }
 
         .link-btn.spotify i { color: #1DB954; }
@@ -390,7 +404,7 @@
         <h1>Spinning in the Plane</h1>
         <p class="artist">by AGENDA, WHYAHYUN</p>
 
-        <!-- 30초 프리뷰 플레이어 전용 영역 -->
+        <!-- 30초 프리뷰 플레이어 박스 -->
         <div class="preview-player-box">
             <div class="preview-header">
                 <span class="preview-badge"><i class="fa-solid fa-headphones"></i> 30s Preview</span>
@@ -425,7 +439,7 @@
             let nowPlayingText = document.getElementById('nowPlayingText');
             let progressBar = document.getElementById('previewProgressBar');
             let eqBars = document.querySelectorAll('#realtimeEq span');
-            let containerBg = document.querySelector('.container::before'); // 뒷배경 참조용
+            let mainContainer = document.getElementById('mainContainer');
 
             let audioCtx, analyser, source, gainNode, dataArray, animationId, fadeTimer;
 
@@ -453,24 +467,20 @@
                 if (!currentAudio.paused) {
                     analyser.getByteFrequencyData(dataArray);
                     
-                    // 1. 실시간 이퀄라이저 바 업데이트
                     for (let i = 0; i < eqBars.length; i++) {
                         let value = dataArray[i * 2] || 0;
                         let heightPercent = Math.max(3, (value / 255) * 10);
                         eqBars[i].style.height = heightPercent + 'px';
                     }
 
-                    // 2. 저음역대(Low Bass, 인덱스 0~3번 영역) 파형을 추출하여 뒷배경 스케일(역동적 반응)에 반영
                     let bassSum = 0;
                     for (let i = 0; i < 4; i++) {
                         bassSum += dataArray[i];
                     }
-                    let bassAvg = bassSum / 4; // 0 ~ 255 평균값
-                    let dynamicScale = 1.0 + (bassAvg / 255) * 0.18; // 저음 칠 때마다 최대 18%까지 줌인/줌아웃
+                    let bassAvg = bassSum / 4; 
+                    let dynamicScale = 1.0 + (bassAvg / 255) * 0.22;
 
-                    let bgElement = document.querySelector('.container');
-                    // 가상요소에 직접 스타일을 주기 위해 CSS 변수 또는 transform 조절
-                    bgElement.style.setProperty('--bg-scale', dynamicScale);
+                    mainContainer.style.setProperty('--bg-scale', dynamicScale);
 
                     let percent = Math.min(100, (currentAudio.currentTime / 30) * 100);
                     progressBar.style.width = percent + '%';
@@ -483,6 +493,7 @@
                 if (fadeTimer) clearTimeout(fadeTimer);
                 if (gainNode) gainNode.gain.setValueAtTime(1.0, audioCtx ? audioCtx.currentTime : 0);
                 cancelAnimationFrame(animationId);
+                mainContainer.style.setProperty('--bg-scale', '1.0');
                 document.querySelectorAll('.track-btn i').forEach(i => i.className = "fa-solid fa-play");
                 nowPlayingText.innerText = "STANDBY";
                 progressBar.style.width = '0%';
@@ -526,24 +537,24 @@
                 resetPlayerState();
             };
 
+            // 링크 배너 클릭 시 '또잉!' 물방울 탄성 애니메이션 후 새 창 열기
             document.querySelectorAll('.link-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     let targetUrl = this.getAttribute('href');
+                    
+                    // 기존에 클래스가 있다면 제거 후 재적용하여 연속 클릭 시에도 애니메이션 발동
+                    this.classList.remove('clicked');
+                    void this.offsetWidth; // reflow 강제 발생
+                    this.classList.add('clicked');
+
+                    // 애니메이션(0.4초)이 절반쯤 지났을 때 부드럽게 창 이동
                     setTimeout(() => {
                         window.open(targetUrl, '_blank');
-                    }, 150);
+                    }, 220);
                 });
             });
         </script>
-
-        <style>
-            /* 동적으로 계산된 저음역대 스케일을 뒷배경에 적용하는 스타일 */
-            .container {
-                transform: scale(var(--bg-scale, 1));
-                transition: transform 0.04s ease-out;
-            }
-        </style>
         
         <!-- 구분선 -->
         <div class="divider"></div>
