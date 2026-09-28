@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda & Whyahyun - Spinning In The Plane</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #eaf6fd; /* 앨범 커버의 시원한 스카이톤 모티브 */
+            color: #222;
+            font-family: 'Apple SD Gothic Neo', -apple-system, sans-serif;
+            text-align: center;
+            padding: 40px 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 140, 200, 0.12);
+            border: 2px solid #00cc66; /* 톱니바퀴 포인트 그린 컬러 연상 */
+        }
+        .album-art {
+            width: 200px;
+            height: 200px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 20px;
+            font-weight: 800;
+            margin: 10px 0 5px;
+            color: #111;
+        }
+        p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .link-btn {
+            display: block;
+            background: #ffffff;
+            color: #222;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: bold;
+            font-size: 15px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+            border: 1.5px solid #eee;
+            transition: all 0.2s ease;
+        }
+        .link-btn:hover {
+            transform: translateY(-2px);
+            border-color: #00cc66;
+            background: #f8fffb;
+        }
+        /* 플랫폼별 포인트 컬러 바 */
+        .link-btn.spotify { border-left: 6px solid #1DB954; }
+        .link-btn.apple { border-left: 6px solid #FA243C; }
+        .link-btn.melon { border-left: 6px solid #00CD3C; }
+        .link-btn.genie { border-left: 6px solid #002D62; }
+        .link-btn.bugs { border-left: 6px solid #FF1D32; }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 앨범 커버 이미지 (추후 이미지를 레포지토리에 올리고 경로를 수정하거나 외부 링크를 쓸 수 있습니다) -->
+        <!-- 임시로 텍스트나 기본 구조만 먼저 확인하셔도 좋습니다 -->
+        <h2>✨</h2>
+        
+        <h1>Spinning In The Plane</h1>
+        <p>Agenda & Whyahyun</p>
+        
+        <div class="link-list">
+            <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">Spotify</a>
+            <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn apple">Apple Music</a>
+            <a href="https://www.melon.com/album/detail.htm?albumId=14556600" target="_blank" class="link-btn melon">Melon</a>
+            <a href="https://www.genie.co.kr/detail/albumInfo?axnm=88166077" target="_blank" class="link-btn genie">Genie</a>
+            <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn bugs">Bugs</a>
+        </div>
+
+        <div class="footer">
+            WHYAHYUN OFFICIAL
+        </div>
+    </div>
+
+</body>
+</html>
