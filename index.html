@@ -11,10 +11,8 @@
             box-sizing: border-box;
         }
         body {
-            /* 싱그러운 그린과 아쿠아 블루가 흐르는 배경 애니메이션 */
+            /* 기본 백그라운드 그라데이션 */
             background: linear-gradient(135deg, #d4f8e8 0%, #c2eeff 50%, #e0f0ff 100%);
-            background-size: 200% 200%;
-            animation: gradientFlow 12s ease infinite;
             color: #1a2e26;
             font-family: 'Apple SD Gothic Neo', -apple-system, sans-serif;
             text-align: center;
@@ -26,30 +24,46 @@
             min-height: 100vh;
             overflow-x: hidden;
             cursor: default;
+            position: relative;
         }
 
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* 배경 전체를 감싸는 초대형 앨범 커버 실루엣 레이어 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%; left: -20%; right: -20%; bottom: -20%;
+            background: url('cover.png') no-repeat center center;
+            background-size: cover;
+            /* 배너 가독성을 위해 투명도를 낮추고 강하게 블러(흐림) 처리하여 실루엣만 은은하게 보이도록 함 */
+            opacity: 0.12;
+            filter: blur(35px) saturate(1.2);
+            z-index: 1;
+            pointer-events: none;
+            animation: bgPulse 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
         }
 
         .container {
             width: 100%;
             max-width: 400px;
-            /* 완전 맑고 투명한 유리 판넬 느낌 */
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            /* 완전 맑고 투명한 유리 판넬 느낌 (배경 실루엣이 은은하게 비침) */
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             padding: 32px 22px;
             border-radius: 32px;
             box-shadow: 0 20px 50px rgba(0, 120, 180, 0.15), 
                         inset 0 0 30px rgba(255, 255, 255, 0.8),
                         inset 0 0 5px rgba(255, 255, 255, 1);
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.85);
             animation: smoothSlideDown 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             position: relative;
             z-index: 2;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         @keyframes smoothSlideDown {
@@ -74,17 +88,7 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             transform: scale(1);
-            transition: transform 0.1s ease;
-        }
-
-        /* 음악 재생 시 비트에 맞춰 쿵-쿵 뛰는 오디오 리액티브 펄스 클래스 */
-        .album-art-container.playing {
-            animation: audioPulse 0.6s infinite alternate ease-in-out;
-        }
-
-        @keyframes audioPulse {
-            0% { transform: scale(1); box-shadow: 0 12px 30px rgba(0, 199, 86, 0.2); }
-            100% { transform: scale(1.05); box-shadow: 0 18px 40px rgba(0, 199, 86, 0.4); }
+            transition: transform 0.05s ease-out;
         }
 
         .album-art {
@@ -96,7 +100,6 @@
             display: block;
         }
 
-        /* 맑고 투명한 아쿠아 리플(물결 파동) 오버레이 효과 */
         .album-art-container::before {
             content: '';
             position: absolute;
@@ -164,7 +167,6 @@
             text-align: left;
         }
 
-        /* 윈도우 미니 창 타이틀 바 느낌 */
         .player-header {
             display: flex;
             justify-content: space-between;
@@ -197,12 +199,11 @@
             display: inline-block;
         }
 
-        /* 액티브 비주얼라이저 (주파수 바) */
         .visualizer-screen {
             background: rgba(10, 30, 25, 0.85);
             border-radius: 10px;
             padding: 8px 12px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -218,33 +219,31 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 220px;
+            max-width: 200px;
         }
 
-        .mini-eq {
+        .realtime-eq {
             display: flex;
-            gap: 2px;
+            gap: 2.5px;
             align-items: flex-end;
-            height: 12px;
+            height: 14px;
         }
 
-        .mini-eq span {
-            width: 2.5px;
+        .realtime-eq span {
+            width: 3px;
             background: #00ff88;
             border-radius: 1px;
-            animation: none;
+            height: 4px;
+            transition: height 0.05s ease;
+            box-shadow: 0 0 5px rgba(0,255,136,0.5);
         }
 
-        /* 재생 중일 때만 움직이는 이퀄라이저 애니메이션 */
-        .playing-eq span:nth-child(1) { animation: eqBounce 0.5s infinite alternate ease-in-out; height: 4px; }
-        .playing-eq span:nth-child(2) { animation: eqBounce 0.4s infinite alternate ease-in-out 0.1s; height: 10px; }
-        .playing-eq span:nth-child(3) { animation: eqBounce 0.6s infinite alternate ease-in-out 0.2s; height: 6px; }
-        .playing-eq span:nth-child(4) { animation: eqBounce 0.45s infinite alternate ease-in-out 0.15s; height: 12px; }
-        .playing-eq span:nth-child(5) { animation: eqBounce 0.55s infinite alternate ease-in-out 0.05s; height: 8px; }
-
-        @keyframes eqBounce {
-            0% { height: 3px; }
-            100% { height: 14px; }
+        .player-divider {
+            width: 100%;
+            height: 1px;
+            background: rgba(0, 100, 150, 0.15);
+            margin-bottom: 12px;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.6);
         }
 
         .track-buttons {
@@ -294,12 +293,12 @@
             gap: 12px;
         }
 
-        /* 완전히 투명하고 영롱한 아크릴 버튼 스타일 */
+        /* 액체처럼 출렁이는 클릭 효과를 가진 링크 배너 */
         .link-btn {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: #1a1a1a;
@@ -312,7 +311,33 @@
                         inset 0 2px 4px rgba(255, 255, 255, 0.9),
                         inset 0 -2px 4px rgba(200, 225, 245, 0.3);
             border: 1.5px solid rgba(255, 255, 255, 0.85);
-            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-origin: center center;
+            transition: transform 0.15s ease, background 0.25s, box-shadow 0.25s, border-color 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 클릭했을 때 액체 파동이 퍼져나가는 효과 */
+        .link-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 5px; height: 5px;
+            background: rgba(0, 255, 136, 0.4);
+            opacity: 0;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: none;
+            transition: none;
+        }
+
+        .link-btn.liquid-clicked::after {
+            animation: liquidSplash 0.6s cubic-bezier(0, 0.2, 0.8, 1) forwards;
+        }
+
+        @keyframes liquidSplash {
+            0% { width: 5px; height: 5px; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { width: 350px; height: 350px; opacity: 0; transform: translate(-50%, -50%) scale(1); }
         }
 
         .link-btn span {
@@ -327,7 +352,7 @@
 
         .link-btn:hover {
             transform: translateY(-3px) scale(1.02);
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.8);
             border-color: rgba(0, 199, 86, 0.9);
             box-shadow: 0 12px 25px rgba(0, 199, 86, 0.2),
                         inset 0 2px 5px rgba(255, 255, 255, 1);
@@ -357,13 +382,13 @@
             justify-content: center;
             padding: 13px 10px;
             font-size: 14px;
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.5);
         }
         
         .link-btn.instagram i { color: #E1306C; }
 
         .link-btn.instagram:hover {
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.8);
             border-color: #E1306C;
             box-shadow: 0 12px 25px rgba(225, 48, 108, 0.2),
                         inset 0 2px 5px rgba(255, 255, 255, 1);
@@ -404,8 +429,8 @@
         });
     </script>
 
-    <div class="container">
-        <!-- 앨범 커버 (물결 리플 + 오디오 리액티브 펄스) -->
+    <div class="container" id="mainContainer">
+        <!-- 앨범 커버 (실시간 오디오 주파수 반응 적용) -->
         <div class="art-wrapper">
             <div class="album-art-container" id="artContainer">
                 <img src="cover.png" alt="Spinning In The Plane Artwork" class="album-art">
@@ -427,13 +452,16 @@
                 </div>
             </div>
 
-            <!-- 디스플레이 스크린 & 이퀄라이저 바 -->
+            <!-- 디스플레이 스크린 & 실시간 이퀄라이저 바 -->
             <div class="visualizer-screen">
                 <span class="now-playing-label" id="nowPlayingText">STANDBY...</span>
-                <div class="mini-eq" id="miniEq">
+                <div class="realtime-eq" id="realtimeEq">
                     <span></span><span></span><span></span><span></span><span></span>
                 </div>
             </div>
+
+            <!-- 스크린과 트랙 버튼 사이의 깔끔한 구분선 -->
+            <div class="player-divider"></div>
 
             <div class="track-buttons">
                 <button class="track-btn" onclick="playAudio('track1.mp3', '1. 거짓말쟁이 (Liar)', this)">
@@ -447,29 +475,66 @@
             </div>
         </div>
 
-        <!-- 오디오 재생 및 플레이어 제어 스크립트 -->
-        <audio id="audioPlayer"></audio>
+        <!-- 오디오 재생 및 웹 오디오 API 실시간 분석 스크립트 -->
+        <audio id="audioPlayer" crossorigin="anonymous"></audio>
         <script>
             let currentAudio = document.getElementById('audioPlayer');
             let artContainer = document.getElementById('artContainer');
             let nowPlayingText = document.getElementById('nowPlayingText');
-            let miniEq = document.getElementById('miniEq');
+            let eqBars = document.querySelectorAll('#realtimeEq span');
+
+            let audioCtx, analyser, source, dataArray, animationId;
+
+            function initAudioAPI() {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    analyser = audioCtx.createAnalyser();
+                    source = audioCtx.createMediaElementSource(currentAudio);
+                    source.connect(analyser);
+                    analyser.connect(audioCtx.destination);
+                    analyser.fftSize = 64;
+                    dataArray = new Uint8Array(analyser.frequencyBinCount);
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            }
+
+            function updateVisualizer() {
+                if (!currentAudio.paused) {
+                    analyser.getByteFrequencyData(dataArray);
+                    
+                    for (let i = 0; i < eqBars.length; i++) {
+                        let value = dataArray[i * 2] || 0;
+                        let heightPercent = Math.max(4, (value / 255) * 16);
+                        eqBars[i].style.height = heightPercent + 'px';
+                    }
+
+                    let bassEnergy = dataArray[1] || 0;
+                    let scaleValue = 1 + (bassEnergy / 255) * 0.08;
+                    artContainer.style.transform = `scale(${scaleValue})`;
+
+                    animationId = requestAnimationFrame(updateVisualizer);
+                }
+            }
 
             function playAudio(file, trackName, btn) {
+                initAudioAPI();
+
                 if(currentAudio.src.includes(file) && !currentAudio.paused) {
                     currentAudio.pause();
                     btn.querySelector('i').className = "fa-solid fa-play";
-                    artContainer.classList.remove('playing');
-                    miniEq.classList.remove('playing-eq');
+                    cancelAnimationFrame(animationId);
+                    artContainer.style.transform = 'scale(1)';
                     nowPlayingText.innerText = "PAUSED";
                 } else {
                     currentAudio.src = file;
                     currentAudio.play().then(() => {
                         document.querySelectorAll('.track-btn i').forEach(i => i.className = "fa-solid fa-play");
                         btn.querySelector('i').className = "fa-solid fa-pause";
-                        artContainer.classList.add('playing');
-                        miniEq.classList.add('playing-eq');
                         nowPlayingText.innerText = "▶ " + trackName;
+                        cancelAnimationFrame(animationId);
+                        updateVisualizer();
                     }).catch(e => {
                         alert("깃허브 저장소에 미리듣기 음원 파일('" + file + "')을 업로드해 주시면 정상적으로 재생됩니다!");
                     });
@@ -478,13 +543,41 @@
             
             currentAudio.onended = function() {
                 document.querySelectorAll('.track-btn i').forEach(i => i.className = "fa-solid fa-play");
-                artContainer.classList.remove('playing');
-                miniEq.classList.remove('playing-eq');
+                cancelAnimationFrame(animationId);
+                artContainer.style.transform = 'scale(1)';
                 nowPlayingText.innerText = "READY";
+                eqBars.forEach(bar => bar.style.height = '4px');
             };
+
+            // 링크 배너 클릭 시 액체처럼 출렁이며 페이지가 열리는 인터랙션 처리
+            document.querySelectorAll('.link-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let targetUrl = this.getAttribute('href');
+
+                    this.classList.add('liquid-clicked');
+                    
+                    this.style.transform = 'scaleX(1.12) scaleY(0.85)';
+                    setTimeout(() => {
+                        this.style.transform = 'scaleX(0.92) scaleY(1.12)';
+                    }, 100);
+                    setTimeout(() => {
+                        this.style.transform = 'scaleX(1.05) scaleY(0.95)';
+                    }, 200);
+
+                    let container = document.getElementById('mainContainer');
+                    container.style.transform = 'scale(0.97) translateY(4px)';
+
+                    setTimeout(() => {
+                        window.open(targetUrl, '_blank');
+                        this.classList.remove('liquid-clicked');
+                        this.style.transform = 'scale(1)';
+                        container.style.transform = 'scale(1) translateY(0)';
+                    }, 400);
+                });
+            });
         </script>
         
-        <!-- 미리듣기와 음원 사이트 사이 구분선 (격자선) 추가 -->
         <div class="divider"></div>
 
         <div class="link-list">
