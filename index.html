@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda & Whyahyun - Spinning In The Plane</title>
+    <!-- 아이콘 사용을 위한 FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
         }
         body {
-            background-color: #ffffff; /* 깔끔한 화이트 배경 */
+            background-color: #ffffff;
             color: #222;
             font-family: 'Apple SD Gothic Neo', -apple-system, sans-serif;
             text-align: center;
@@ -28,20 +30,12 @@
             border-radius: 28px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
             border: 2px solid #eaeaea;
-            
-            /* 등장 애니메이션 효과 */
             animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes fadeInScale {
-            0% {
-                opacity: 0;
-                transform: translateY(20px) scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .album-art {
@@ -54,8 +48,6 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
             margin-bottom: 20px;
             border: 2px solid #f0f0f0;
-            
-            /* 앨범 커버 살짝 숨쉬는 듯한 부드러운 애니메이션 */
             animation: floatArt 4s ease-in-out infinite;
         }
 
@@ -95,17 +87,29 @@
         }
 
         .link-btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background: #ffffff;
             color: #222;
             text-decoration: none;
-            padding: 14px;
+            padding: 14px 18px;
             border-radius: 14px;
             font-weight: bold;
             font-size: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.03);
             border: 1.5px solid #eee;
             transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .link-btn span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .link-btn i {
+            font-size: 18px;
         }
 
         .link-btn:hover {
@@ -115,37 +119,39 @@
             box-shadow: 0 6px 15px rgba(0, 199, 86, 0.12);
         }
 
-        /* 플랫폼별 포인트 컬러 바 */
+        /* 플랫폼별 포인트 컬러 및 아이콘 색상 */
         .link-btn.spotify { border-left: 6px solid #1DB954; }
+        .link-btn.spotify i { color: #1DB954; }
+        
         .link-btn.apple { border-left: 6px solid #FA243C; }
+        .link-btn.apple i { color: #FA243C; }
+        
         .link-btn.melon { border-left: 6px solid #00CD3C; }
+        .link-btn.melon i { color: #00CD3C; }
+        
         .link-btn.genie { border-left: 6px solid #002D62; }
+        .link-btn.genie i { color: #002D62; }
+        
         .link-btn.bugs { border-left: 6px solid #FF1D32; }
+        .link-btn.bugs i { color: #FF1D32; }
 
-        /* 소셜(인스타그램) 링크 영역 */
-        .social-links {
+        /* 인스타그램 버튼 전용 스타일 */
+        .link-btn.instagram { 
+            border-left: 6px solid #E1306C; 
+            background: #fafafa;
+        }
+        .link-btn.instagram i { color: #E1306C; }
+        .link-btn.instagram:hover {
+            background: #fff0f5;
+            border-color: #E1306C;
+            box-shadow: 0 6px 15px rgba(225, 48, 108, 0.12);
+        }
+
+        .insta-group {
+            margin-top: 12px;
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .social-btn {
-            font-size: 12px;
-            color: #555;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 6px 12px;
-            background: #f7f7f7;
-            border-radius: 20px;
-            transition: all 0.2s ease;
-        }
-
-        .social-btn:hover {
-            background: #222;
-            color: #fff;
+            flex-direction: column;
+            gap: 8px;
         }
     </style>
 </head>
@@ -160,17 +166,39 @@
         <p class="artist">by AGENDA, WHYAHYUN</p>
         
         <div class="link-list">
-            <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">Spotify</a>
-            <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn apple">Apple Music</a>
-            <a href="https://www.melon.com/album/detail.htm?albumId=14556600" target="_blank" class="link-btn melon">Melon</a>
-            <a href="https://www.genie.co.kr/detail/albumInfo?axnm=88166077" target="_blank" class="link-btn genie">Genie</a>
-            <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn bugs">Bugs</a>
-        </div>
+            <!-- 음원 플랫폼 링크들 -->
+            <a href="https://open.spotify.com/album/4q3ZmnVvUyOzZCxuXJCdKp?si=R527rIoDRFi9nGu_xv94vg" target="_blank" class="link-btn spotify">
+                <span><i class="fa-brands fa-spotify"></i> Spotify</span>
+                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+            </a>
+            <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn apple">
+                <span><i class="fa-brands fa-apple"></i> Apple Music</span>
+                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+            </a>
+            <a href="https://www.melon.com/album/detail.htm?albumId=14556600" target="_blank" class="link-btn melon">
+                <span><i class="fa-solid fa-compact-disc"></i> Melon</span>
+                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+            </a>
+            <a href="https://www.genie.co.kr/detail/albumInfo?axnm=88166077" target="_blank" class="link-btn genie">
+                <span><i class="fa-solid fa-music"></i> Genie</span>
+                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+            </a>
+            <a href="https://music.apple.com/us/album/spinning-in-the-plane-single/6807306644?l=es-MX" target="_blank" class="link-btn bugs">
+                <span><i class="fa-solid fa-headphones"></i> Bugs</span>
+                <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+            </a>
 
-        <!-- 인스타그램 채널 연동 영역 -->
-        <div class="social-links">
-            <a href="https://instagram.com/vque6v" target="_blank" class="social-btn">@ AGENDA Instagram</a>
-            <a href="https://instagram.com/whyahyun" target="_blank" class="social-btn">@ WHYAHYUN Instagram</a>
+            <!-- 인스타그램 버튼 그룹 -->
+            <div class="insta-group">
+                <a href="https://instagram.com/vpue6v" target="_blank" class="link-btn instagram">
+                    <span><i class="fa-brands fa-instagram"></i> @vpue6v (AGENDA)</span>
+                    <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+                </a>
+                <a href="https://instagram.com/whyahyun" target="_blank" class="link-btn instagram">
+                    <span><i class="fa-brands fa-instagram"></i> @whyahyun (WHYAHYUN)</span>
+                    <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: #ccc;"></i>
+                </a>
+            </div>
         </div>
     </div>
 
